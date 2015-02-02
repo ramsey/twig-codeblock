@@ -208,6 +208,7 @@ class CodeBlockParser extends \Twig_TokenParser
                 if ($token->test(\Twig_Token::STRING_TYPE)) {
                     $this->parseStringAttribute($token, $stream);
                 }
+                $stream->next();
                 break;
 
         }
@@ -435,7 +436,5 @@ class CodeBlockParser extends \Twig_TokenParser
         } elseif (empty($this->attributes['linkText'])) {
             $this->attributes['linkText'] = $token->getValue();
         }
-
-        $stream->next();
     }
 }
