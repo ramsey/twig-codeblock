@@ -1,7 +1,7 @@
 {
     "name": "rhumsaa/twig-codeblock",
     "homepage": "https://github.com/ramsey/rhumsaa-twig-codeblock",
-    "description": "A Twig extension for defining blocks of code for syntax highlighting and more.",
+    "description": "A Twig extension for defining blocks of code for syntax highlighting (with Pygments) and more.",
     "keywords": ["twig", "extension", "syntax", "highlighting", "pygments", "pygmentize"],
     "type": "library",
     "license": "MIT",
