@@ -25,12 +25,16 @@ class CodeBlockParser extends \Twig_TokenParser
      *
      * * `lang`: Programming language for the code
      * * `format`: Output format for the code (defaults to "html")
-     * * `linenos`: `true` if line numbers should be included in the highlighted code
+     * * `linenos`: `true` if line numbers should be included in the
+     *     highlighted code
      * * `start`: Starting line number for the code, if linenos is true
      * * `end`: Ending line number for the code, if linenos is true
-     * * `range`: Provides starting and ending line numbers, if linenos is true (overrides start and end)
-     * * `mark`: Mark one or more lines of code in the output. Accepts one number, numbers separated by
-     *     commas, and number ranges. Example `mark:1,5-8` will mark lines 1,5,6,7,8. Note: If you've changed the beginning line number be sure these match rendered line numbers
+     * * `range`: Provides starting and ending line numbers, if linenos is true
+     *     (overrides start and end)
+     * * `mark`: Mark one or more lines of code in the output. Accepts one
+     *     number, numbers separated by commas, and number ranges. Example
+     *     `mark:1,5-8` will mark lines 1,5,6,7,8. Note: If you've changed the
+     *     beginning line number be sure these match rendered line numbers
      * * `title`: The figcaption title for the code block
      * * `linkUrl`: Download or reference link for the code
      * * `linkText`: Text for the linkUrl, defaults to "link"
