@@ -112,6 +112,10 @@ class PygmentsHighlighter implements HighlighterInterface
             $pygmentsOptions['hl_lines'] = $this->parseMarks($options['mark']);
         }
 
+        if (isset($options['phpopentag']) && $options['phpopentag'] === false) {
+            $pygmentsOptions['startinline'] = 'True';
+        }
+
         return $pygmentsOptions;
     }
 

@@ -35,6 +35,9 @@ class CodeBlockParser extends \Twig_TokenParser
      *     number, numbers separated by commas, and number ranges. Example
      *     `mark:1,5-8` will mark lines 1,5,6,7,8. Note: If you've changed the
      *     beginning line number be sure these match rendered line numbers
+     * * `phpopentag`: (PHP specific) if lang is "php" and the code to highlight
+     *     should not require a starting `<?php` tag, then set this to `false`;
+     *     defaults to `true`
      * * `title`: The figcaption title for the code block
      * * `linkUrl`: Download or reference link for the code
      * * `linkText`: Text for the linkUrl, defaults to "link"
@@ -195,6 +198,10 @@ class CodeBlockParser extends \Twig_TokenParser
 
             case 'linenos':
                 $this->attributes['linenos'] = $this->parseLinenosOption($token, $stream);
+                break;
+
+            case 'phpopentag':
+                $this->attributes['phpopentag'] = $this->parsePhpOpenTagOption($token, $stream);
                 break;
 
             default:
@@ -363,6 +370,32 @@ class CodeBlockParser extends \Twig_TokenParser
         if (!($expr instanceof \Twig_Node_Expression_Constant) || !is_bool($expr->getAttribute('value'))) {
             throw new SyntaxException(
                 'The linenos option must be boolean true or false (i.e. linenos:false)',
+                $stream->getCurrent()->getLine(),
+                $stream->getFilename()
+            );
+        }
+
+        return $expr->getAttribute('value');
+    }
+
+    /**
+     * Returns the phpopentag option value from the phpopentag token
+     *
+     * @param \Twig_Token $token The token to parse
+     * @param \Twig_TokenStream $stream The token stream being traversed
+     * @return boolean
+     */
+    protected function parsePhpOpenTagOption(\Twig_Token $token, \Twig_TokenStream $stream)
+    {
+        $this->testToken('phpopentag', $token, $stream);
+
+        $stream->next();
+        $stream->expect(\Twig_Token::PUNCTUATION_TYPE); // colon (:) separator
+        $expr = $this->parser->getExpressionParser()->parseExpression();
+
+        if (!($expr instanceof \Twig_Node_Expression_Constant) || !is_bool($expr->getAttribute('value'))) {
+            throw new SyntaxException(
+                'The phpopentag option must be boolean true or false (i.e. phpopentag:false)',
                 $stream->getCurrent()->getLine(),
                 $stream->getFilename()
             );
