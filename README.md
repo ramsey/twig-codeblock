@@ -5,7 +5,7 @@
 
 The {% codeblock %} extension for Twig is a port of the [Octopress codeblock liquid tag](https://github.com/octopress/codeblock) for use with the [Twig template engine for PHP](http://twig.sensiolabs.org/).
 
-By default, Codeblock uses the [Pygments Python syntax highlighter](http://pygments.org/) for generating HTML mark-up suitable for highlighting blocks of code. However, it is flexible enough to use any syntax highlighter of your choice; simply implement the `HighlighterInterface` and provide some additional configuration (see below for an example).
+By default, Codeblock uses the [Pygments Python syntax highlighter](http://pygments.org/) for generating HTML markup suitable for highlighting blocks of code. However, it is flexible enough to use any syntax highlighter of your choice; simply implement the `HighlighterInterface` and provide some additional configuration (see below for an example).
 
 ## Using the Codeblock tag
 
@@ -145,7 +145,7 @@ To see more, type the following from the command line:
 
 ## Configuration
 
-By default, the extension uses Pygments and, if `pygmentize` is in your `PATH`, then you do not need to pass any arguments.
+By default, Codeblock uses Pygments and, if `pygmentize` is in your `PATH`, then you do not need to pass any arguments.
 
     services:
         ramsey.twig.codeblock_extension:
