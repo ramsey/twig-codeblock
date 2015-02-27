@@ -1,5 +1,8 @@
 # CodeBlock Extension for Twig
 
+[![Build Status](https://travis-ci.org/ramsey/twig-codeblock.svg?branch=master)](https://travis-ci.org/ramsey/twig-codeblock)
+[![Coverage Status](https://coveralls.io/repos/ramsey/twig-codeblock/badge.svg)](https://coveralls.io/r/ramsey/twig-codeblock)
+
 Documentation to be updated and polished soon...
 
 ### Using the codeblock tag
