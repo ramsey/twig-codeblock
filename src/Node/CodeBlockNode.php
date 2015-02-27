@@ -65,7 +65,6 @@ class CodeBlockNode extends \Twig_Node
     {
         $compiler->addDebugInfo($this);
 
-        // Instantiate the highlighter using the HighlighterFactory
         $compiler
             ->write('$highlighter = \Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter(')
             ->string($this->getHighlighterName())
@@ -73,12 +72,22 @@ class CodeBlockNode extends \Twig_Node
             ->repr($this->getHighlighterArgs())
             ->raw(");\n");
 
-        // Echo the highlighted string
         $compiler
-            ->write('echo $highlighter->highlight(')
+            ->write('$highlightedCode = $highlighter->highlight(')
             ->string($this->getNode('body')->getAttribute('data'))
             ->raw(', ')
             ->repr($this->attributes)
+            ->raw(");\n");
+
+        $compiler
+            ->write('$figcaption = ')
+            ->string($this->getFigcaption())
+            ->raw(";\n");
+
+        $compiler
+            ->write('echo sprintf(')
+            ->raw('"<figure class=\"code-highlight-figure\">%s%s</figure>\n",')
+            ->raw(' $figcaption, $highlightedCode')
             ->raw(");\n");
     }
 
@@ -100,5 +109,60 @@ class CodeBlockNode extends \Twig_Node
     public function getHighlighterArgs()
     {
         return $this->highlighterArgs;
+    }
+
+    /**
+     * Returns the figcaption HTML element for the codeblock
+     *
+     * @return string
+     */
+    protected function getFigcaption()
+    {
+        $figcaption = '';
+
+        if ($this->hasAttribute('title')) {
+            $figcaption = '<figcaption class="code-highlight-caption">';
+            $figcaption .= '<span class="code-highlight-caption-title">';
+            $figcaption .= $this->getAttribute('title');
+            $figcaption .= '</span>';
+            $figcaption .= $this->getFigcaptionLink();
+            $figcaption .= '</figcaption>';
+        }
+
+        return $figcaption;
+    }
+
+    /**
+     * Returns the link for the figcaption, if applicable
+     *
+     * @return string
+     */
+    protected function getFigcaptionLink()
+    {
+        $link = '';
+
+        if ($this->hasAttribute('linkUrl')) {
+            $link = '<a class="code-highlight-caption-link" href="'
+                . $this->getAttribute('linkUrl')
+                . '">';
+            $link .= $this->getFigcaptionLinkText();
+            $link .= '</a>';
+        }
+
+        return $link;
+    }
+
+    /**
+     * Returns the link text for the figcaption link
+     *
+     * @return string
+     */
+    protected function getFigcaptionLinkText()
+    {
+        if ($this->hasAttribute('linkText')) {
+            return $this->getAttribute('linkText');
+        }
+
+        return 'link';
     }
 }
