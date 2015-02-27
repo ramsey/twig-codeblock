@@ -418,7 +418,6 @@ class CodeBlockParser extends \Twig_TokenParser
             throw new RuntimeException(
                 sprintf(
                     "Expected string token but received '%s' instead",
-                    $value,
                     \Twig_Token::typeToEnglish($token->getType())
                 ),
                 $stream->getCurrent()->getLine(),

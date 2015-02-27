@@ -68,9 +68,9 @@ class CodeBlockNode extends \Twig_Node
         // Instantiate the highlighter using the HighlighterFactory
         $compiler
             ->write('$highlighter = \Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter(')
-            ->string($this->highlighterName)
+            ->string($this->getHighlighterName())
             ->raw(', ')
-            ->repr($this->highlighterArgs)
+            ->repr($this->getHighlighterArgs())
             ->raw(");\n");
 
         // Echo the highlighted string
@@ -80,5 +80,25 @@ class CodeBlockNode extends \Twig_Node
             ->raw(', ')
             ->repr($this->attributes)
             ->raw(");\n");
+    }
+
+    /**
+     * Returns the name of the highlighter used by this code block
+     *
+     * @return string
+     */
+    public function getHighlighterName()
+    {
+        return $this->highlighterName;
+    }
+
+    /**
+     * Returns the highlighter arguments used by this code block
+     *
+     * @return array
+     */
+    public function getHighlighterArgs()
+    {
+        return $this->highlighterArgs;
     }
 }

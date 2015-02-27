@@ -51,6 +51,7 @@ class PygmentsHighlighterTest extends TestCase
             'start' => 1,
             'end' => 30,
             'mark' => '1,5-8,15-20,24',
+            'phpopentag' => false,
         ];
 
         $expectedParsedOptions = [
@@ -58,6 +59,7 @@ class PygmentsHighlighterTest extends TestCase
             'linenos' => 'table',
             'linenostart' => 1,
             'hl_lines' => '1 5 6 7 8 15 16 17 18 19 20 24',
+            'startinline' => 'True',
         ];
 
         $returnMock = $this->highlighter->highlight($code, $tagOptions);
