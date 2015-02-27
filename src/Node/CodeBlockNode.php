@@ -79,16 +79,18 @@ class CodeBlockNode extends \Twig_Node
             ->repr($this->attributes)
             ->raw(");\n");
 
-        $compiler
-            ->write('$figcaption = ')
-            ->string($this->getFigcaption())
-            ->raw(";\n");
-
-        $compiler
-            ->write('echo sprintf(')
-            ->raw('"<figure class=\"code-highlight-figure\">%s%s</figure>\n",')
-            ->raw(' $figcaption, $highlightedCode')
-            ->raw(");\n");
+        if ($this->hasAttribute('format') && $this->getAttribute('format') == 'html') {
+            $compiler
+                ->write('$figcaption = ')
+                ->string($this->getFigcaption())
+                ->raw(";\n")
+                ->write('echo sprintf(')
+                ->raw('"<figure class=\"code-highlight-figure\">%s%s</figure>\n",')
+                ->raw(' $figcaption, $highlightedCode')
+                ->raw(");\n");
+        } else {
+            $compiler->write('echo $highlightedCode;' . "\n");
+        }
     }
 
     /**

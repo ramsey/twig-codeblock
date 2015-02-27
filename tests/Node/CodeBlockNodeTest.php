@@ -22,8 +22,7 @@ class CodeBlockNodeTest extends TestCase
 $highlighter = \Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter("pygments", array(0 => "/usr/local/bin/pygmentize"));
 $highlightedCode = $highlighter->highlight("<?php
 phpinfo();", array("lang" => "php", "format" => "bbcode", "linenos" => true, "start" => 1, "end" => 30, "mark" => "1,5-8,15-20,24", "phpopentag" => false));
-$figcaption = "";
-echo sprintf("<figure class=\"code-highlight-figure\">%s%s</figure>\n", $figcaption, $highlightedCode);
+echo $highlightedCode;
 
 EOD;
 
@@ -56,7 +55,7 @@ EOD;
         $expectedSource = <<<'EOD'
 $highlighter = \Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter("pygments", array(0 => "/usr/local/bin/pygmentize"));
 $highlightedCode = $highlighter->highlight("<?php
-phpinfo();", array("lang" => "php", "title" => "Test Title"));
+phpinfo();", array("format" => "html", "lang" => "php", "title" => "Test Title"));
 $figcaption = "<figcaption class=\"code-highlight-caption\"><span class=\"code-highlight-caption-title\">Test Title</span></figcaption>";
 echo sprintf("<figure class=\"code-highlight-figure\">%s%s</figure>\n", $figcaption, $highlightedCode);
 
@@ -68,6 +67,7 @@ EOD;
                 '/usr/local/bin/pygmentize',
             ],
             [
+                'format' => 'html',
                 'lang' => 'php',
                 'title' => 'Test Title',
             ],
@@ -86,7 +86,7 @@ EOD;
         $expectedSource = <<<'EOD'
 $highlighter = \Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter("pygments", array(0 => "/usr/local/bin/pygmentize"));
 $highlightedCode = $highlighter->highlight("<?php
-phpinfo();", array("lang" => "php", "title" => "Test Title", "linkUrl" => "http://example.org"));
+phpinfo();", array("format" => "html", "lang" => "php", "title" => "Test Title", "linkUrl" => "http://example.org"));
 $figcaption = "<figcaption class=\"code-highlight-caption\"><span class=\"code-highlight-caption-title\">Test Title</span><a class=\"code-highlight-caption-link\" href=\"http://example.org\">link</a></figcaption>";
 echo sprintf("<figure class=\"code-highlight-figure\">%s%s</figure>\n", $figcaption, $highlightedCode);
 
@@ -98,6 +98,7 @@ EOD;
                 '/usr/local/bin/pygmentize',
             ],
             [
+                'format' => 'html',
                 'lang' => 'php',
                 'title' => 'Test Title',
                 'linkUrl' => 'http://example.org',
@@ -117,7 +118,7 @@ EOD;
         $expectedSource = <<<'EOD'
 $highlighter = \Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter("pygments", array(0 => "/usr/local/bin/pygmentize"));
 $highlightedCode = $highlighter->highlight("<?php
-phpinfo();", array("lang" => "php", "title" => "Test Title", "linkUrl" => "http://example.org", "linkText" => "My Listing"));
+phpinfo();", array("format" => "html", "lang" => "php", "title" => "Test Title", "linkUrl" => "http://example.org", "linkText" => "My Listing"));
 $figcaption = "<figcaption class=\"code-highlight-caption\"><span class=\"code-highlight-caption-title\">Test Title</span><a class=\"code-highlight-caption-link\" href=\"http://example.org\">My Listing</a></figcaption>";
 echo sprintf("<figure class=\"code-highlight-figure\">%s%s</figure>\n", $figcaption, $highlightedCode);
 
@@ -129,6 +130,7 @@ EOD;
                 '/usr/local/bin/pygmentize',
             ],
             [
+                'format' => 'html',
                 'lang' => 'php',
                 'title' => 'Test Title',
                 'linkUrl' => 'http://example.org',
