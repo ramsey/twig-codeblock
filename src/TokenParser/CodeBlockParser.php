@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Rhumsaa\Twig\CodeBlock extension for Twig
+ * This file is part of the Ramsey\Twig\CodeBlock extension for Twig
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -9,11 +9,11 @@
  * @license http://opensource.org/licenses/MIT MIT
  */
 
-namespace Rhumsaa\Twig\CodeBlock\TokenParser;
+namespace Ramsey\Twig\CodeBlock\TokenParser;
 
-use Rhumsaa\Twig\CodeBlock\Exception\RuntimeException;
-use Rhumsaa\Twig\CodeBlock\Exception\SyntaxException;
-use Rhumsaa\Twig\CodeBlock\Node\CodeBlockNode;
+use Ramsey\Twig\CodeBlock\Exception\RuntimeException;
+use Ramsey\Twig\CodeBlock\Exception\SyntaxException;
+use Ramsey\Twig\CodeBlock\Node\CodeBlockNode;
 
 /**
  * Parses a codeblock tag for Twig

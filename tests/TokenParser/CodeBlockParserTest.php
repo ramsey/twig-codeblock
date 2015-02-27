@@ -1,10 +1,10 @@
 <?php
 
-namespace Rhumsaa\Tests\Twig\CodeBlock\TokenParser;
+namespace Ramsey\Tests\Twig\CodeBlock\TokenParser;
 
-use Rhumsaa\Tests\Twig\CodeBlock\TestCase;
-use Rhumsaa\Twig\CodeBlock\CodeBlockExtension;
-use Rhumsaa\Twig\CodeBlock\TokenParser\CodeBlockParser;
+use Ramsey\Tests\Twig\CodeBlock\TestCase;
+use Ramsey\Twig\CodeBlock\CodeBlockExtension;
+use Ramsey\Twig\CodeBlock\TokenParser\CodeBlockParser;
 
 class CodeBlockParserTest extends TestCase
 {
@@ -44,7 +44,7 @@ class CodeBlockParserTest extends TestCase
             $stream->next();
         }
 
-        $this->assertInstanceOf('Rhumsaa\\Twig\\CodeBlock\\Node\\CodeBlockNode', $node);
+        $this->assertInstanceOf('Ramsey\\Twig\\CodeBlock\\Node\\CodeBlockNode', $node);
         $this->assertEquals('pygments', $node->getHighlighterName());
         $this->assertEquals(['/foo/bin/pygmentize'], $node->getHighlighterArgs());
         $this->assertTrue($node->hasAttribute('lang'));
@@ -72,7 +72,7 @@ class CodeBlockParserTest extends TestCase
             $stream->next();
         }
 
-        $this->assertInstanceOf('Rhumsaa\\Twig\\CodeBlock\\Node\\CodeBlockNode', $node);
+        $this->assertInstanceOf('Ramsey\\Twig\\CodeBlock\\Node\\CodeBlockNode', $node);
         $this->assertEquals('pygments', $node->getHighlighterName());
         $this->assertEquals(['/foo/bin/pygmentize'], $node->getHighlighterArgs());
         $this->assertTrue($node->hasAttribute('lang'));
@@ -102,7 +102,7 @@ class CodeBlockParserTest extends TestCase
     }
 
     /**
-     * @expectedException Rhumsaa\Twig\CodeBlock\Exception\SyntaxException
+     * @expectedException Ramsey\Twig\CodeBlock\Exception\SyntaxException
      * @expectedExceptionMessage The linenos option must be boolean true or false (i.e. linenos:false)
      */
     public function testLinenosException()
@@ -126,7 +126,7 @@ class CodeBlockParserTest extends TestCase
     }
 
     /**
-     * @expectedException Rhumsaa\Twig\CodeBlock\Exception\SyntaxException
+     * @expectedException Ramsey\Twig\CodeBlock\Exception\SyntaxException
      * @expectedExceptionMessage The phpopentag option must be boolean true or false (i.e. phpopentag:false)
      */
     public function testPhpopentagException()
@@ -150,7 +150,7 @@ class CodeBlockParserTest extends TestCase
     }
 
     /**
-     * @expectedException Rhumsaa\Twig\CodeBlock\Exception\RuntimeException
+     * @expectedException Ramsey\Twig\CodeBlock\Exception\RuntimeException
      * @expectedExceptionMessage Expected string token but received 'name' instead
      */
     public function testParseStringAttributeException()
@@ -173,7 +173,7 @@ class CodeBlockParserTest extends TestCase
     }
 
     /**
-     * @expectedException Rhumsaa\Twig\CodeBlock\Exception\RuntimeException
+     * @expectedException Ramsey\Twig\CodeBlock\Exception\RuntimeException
      * @expectedExceptionMessage Expected 'bar' token but received 'foo' instead
      */
     public function testTestTokenException()

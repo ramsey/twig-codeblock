@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Rhumsaa\Twig\CodeBlock extension for Twig
+ * This file is part of the Ramsey\Twig\CodeBlock extension for Twig
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -9,9 +9,9 @@
  * @license http://opensource.org/licenses/MIT MIT
  */
 
-namespace Rhumsaa\Twig\CodeBlock;
+namespace Ramsey\Twig\CodeBlock;
 
-use Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterFactory;
+use Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory;
 
 /**
  * A Twig extension providing codeblock tag functionality for marking up

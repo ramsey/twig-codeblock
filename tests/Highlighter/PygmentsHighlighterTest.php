@@ -1,8 +1,8 @@
 <?php
 
-namespace Rhumsaa\Tests\Twig\CodeBlock\Highlighter;
+namespace Ramsey\Tests\Twig\CodeBlock\Highlighter;
 
-use Rhumsaa\Tests\Twig\CodeBlock\TestCase;
+use Ramsey\Tests\Twig\CodeBlock\TestCase;
 
 class PygmentsHighlighterTest extends TestCase
 {
@@ -10,7 +10,7 @@ class PygmentsHighlighterTest extends TestCase
 
     public function setUp()
     {
-        $highlighter = $this->getMockBuilder('Rhumsaa\Twig\CodeBlock\Highlighter\PygmentsHighlighter')
+        $highlighter = $this->getMockBuilder('Ramsey\Twig\CodeBlock\Highlighter\PygmentsHighlighter')
             ->setMethods(['getPygments'])
             ->getMock();
 
@@ -23,7 +23,7 @@ class PygmentsHighlighterTest extends TestCase
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\Highlighter\PygmentsHighlighter
+     * @covers Ramsey\Twig\CodeBlock\Highlighter\PygmentsHighlighter
      */
     public function testHighlightWithoutOptions()
     {
@@ -38,7 +38,7 @@ class PygmentsHighlighterTest extends TestCase
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\Highlighter\PygmentsHighlighter
+     * @covers Ramsey\Twig\CodeBlock\Highlighter\PygmentsHighlighter
      */
     public function testHighlightWithOptions()
     {
@@ -72,7 +72,7 @@ class PygmentsHighlighterTest extends TestCase
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\Highlighter\PygmentsHighlighter
+     * @covers Ramsey\Twig\CodeBlock\Highlighter\PygmentsHighlighter
      */
     public function testHighlightWithRangeAndStart()
     {

@@ -66,8 +66,8 @@ By default, the extension uses Pygments and, if `pygmentize` is in your `PATH`,
 then you do not need to pass any arguments.
 
     services:
-        rhumsaa.twig.codeblock_extension:
-            class: Rhumsaa\Twig\CodeBlock\CodeBlockExtension
+        ramsey.twig.codeblock_extension:
+            class: Ramsey\Twig\CodeBlock\CodeBlockExtension
             tags:
                 - { name: twig.extension }
 
@@ -75,8 +75,8 @@ However, if `pygmentize` is not in the `PATH`, then you may specify it's
 location, like this:
 
     services:
-        rhumsaa.twig.codeblock_extension:
-            class: Rhumsaa\Twig\CodeBlock\CodeBlockExtension
+        ramsey.twig.codeblock_extension:
+            class: Ramsey\Twig\CodeBlock\CodeBlockExtension
             tags:
                 - { name: twig.extension }
             arguments:
@@ -87,15 +87,15 @@ location, like this:
 ### Using your own highlighter
 
 If you have your own highlighter class that implements
-`Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterInterface`, then you may specify
+`Ramsey\Twig\CodeBlock\Highlighter\HighlighterInterface`, then you may specify
 the fully-qualified classname as the first argument to the extension. The second
 argument is an array of 0-indexed values that will be passed as arguments to
 your class constructor. Make sure that you specify them in the correct order as
 your constructor requires.
 
     services:
-        rhumsaa.twig.codeblock_extension:
-            class: Rhumsaa\Twig\CodeBlock\CodeBlockExtension
+        ramsey.twig.codeblock_extension:
+            class: Ramsey\Twig\CodeBlock\CodeBlockExtension
             tags:
                 - { name: twig.extension }
             arguments:

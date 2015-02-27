@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Rhumsaa\Twig\CodeBlock extension for Twig
+ * This file is part of the Ramsey\Twig\CodeBlock extension for Twig
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -9,7 +9,7 @@
  * @license http://opensource.org/licenses/MIT MIT
  */
 
-namespace Rhumsaa\Twig\CodeBlock\Node;
+namespace Ramsey\Twig\CodeBlock\Node;
 
 /**
  * Represents a codeblock node in Twig
@@ -67,7 +67,7 @@ class CodeBlockNode extends \Twig_Node
 
         // Instantiate the highlighter using the HighlighterFactory
         $compiler
-            ->write('$highlighter = \Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter(')
+            ->write('$highlighter = \Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter(')
             ->string($this->getHighlighterName())
             ->raw(', ')
             ->repr($this->getHighlighterArgs())

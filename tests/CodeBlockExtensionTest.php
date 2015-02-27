@@ -1,8 +1,8 @@
 <?php
 
-namespace Rhumsaa\Tests\Twig\CodeBlock;
+namespace Ramsey\Tests\Twig\CodeBlock;
 
-use Rhumsaa\Twig\CodeBlock\CodeBlockExtension;
+use Ramsey\Twig\CodeBlock\CodeBlockExtension;
 
 class CodeBlockExtensionTest extends TestCase
 {
@@ -11,7 +11,7 @@ class CodeBlockExtensionTest extends TestCase
 
     public function setUp()
     {
-        $class = new \ReflectionClass('Rhumsaa\Twig\CodeBlock\CodeBlockExtension');
+        $class = new \ReflectionClass('Ramsey\Twig\CodeBlock\CodeBlockExtension');
 
         $this->highlighterName = $class->getProperty('highlighterName');
         $this->highlighterName->setAccessible(true);
@@ -21,7 +21,7 @@ class CodeBlockExtensionTest extends TestCase
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\CodeBlockExtension::__construct
+     * @covers Ramsey\Twig\CodeBlock\CodeBlockExtension::__construct
      */
     public function testConstructorWithoutArgs()
     {
@@ -32,7 +32,7 @@ class CodeBlockExtensionTest extends TestCase
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\CodeBlockExtension::__construct
+     * @covers Ramsey\Twig\CodeBlock\CodeBlockExtension::__construct
      */
     public function testConstructorWithArgs()
     {
@@ -46,7 +46,7 @@ class CodeBlockExtensionTest extends TestCase
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\CodeBlockExtension::getName
+     * @covers Ramsey\Twig\CodeBlock\CodeBlockExtension::getName
      */
     public function testGetName()
     {
@@ -56,7 +56,7 @@ class CodeBlockExtensionTest extends TestCase
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\CodeBlockExtension::getTokenParsers
+     * @covers Ramsey\Twig\CodeBlock\CodeBlockExtension::getTokenParsers
      */
     public function testGetTokenParsers()
     {

@@ -3,7 +3,7 @@ source:
     
 destination: build/apidocs
 title: CodeBlock Extension for Twig
-main: Rhumsaa\Twig\CodeBlock
+main: Ramsey\Twig\CodeBlock
 deprecated: true
 todo: true
 sourceCode: true

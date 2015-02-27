@@ -1,15 +1,15 @@
 <?php
 
-namespace Rhumsaa\Tests\Twig\CodeBlock\Highlighter;
+namespace Ramsey\Tests\Twig\CodeBlock\Highlighter;
 
-use Rhumsaa\Tests\Twig\CodeBlock\TestCase;
-use Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterFactory;
-use Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterInterface;
+use Ramsey\Tests\Twig\CodeBlock\TestCase;
+use Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory;
+use Ramsey\Twig\CodeBlock\Highlighter\HighlighterInterface;
 
 class HighlighterFactoryTest extends TestCase
 {
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
+     * @covers Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
      * @expectedException RuntimeException
      * @expectedExceptionMessage Class Foobar does not exist
      */
@@ -19,20 +19,20 @@ class HighlighterFactoryTest extends TestCase
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
+     * @covers Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
      * @expectedException RuntimeException
-     * @expectedExceptionMessage 'Rhumsaa\Tests\Twig\CodeBlock\Highlighter\BadHighlighter'
-     *     must be an instance of 'Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterInterface'
+     * @expectedExceptionMessage 'Ramsey\Tests\Twig\CodeBlock\Highlighter\BadHighlighter'
+     *     must be an instance of 'Ramsey\Twig\CodeBlock\Highlighter\HighlighterInterface'
      */
     public function testHighlighterFactoryClassNotInstanceOfHighlighterInterface()
     {
         $highlighter = HighlighterFactory::getHighlighter(
-            'Rhumsaa\Tests\Twig\CodeBlock\Highlighter\BadHighlighter'
+            'Ramsey\Tests\Twig\CodeBlock\Highlighter\BadHighlighter'
         );
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
+     * @covers Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
      */
     public function testHighlighterFactoryHighlighterInstance()
     {
@@ -43,41 +43,41 @@ class HighlighterFactoryTest extends TestCase
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
+     * @covers Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
      */
     public function testHighlighterFactoryHighlighterClassnameArgs()
     {
         $highlighter = HighlighterFactory::getHighlighter(
-            'Rhumsaa\Tests\Twig\CodeBlock\Highlighter\GoodHighlighter',
+            'Ramsey\Tests\Twig\CodeBlock\Highlighter\GoodHighlighter',
             [
                 '/path/to/highlighter',
                 'html'
             ]
         );
 
-        $this->assertInstanceOf('Rhumsaa\Tests\Twig\CodeBlock\Highlighter\GoodHighlighter', $highlighter);
+        $this->assertInstanceOf('Ramsey\Tests\Twig\CodeBlock\Highlighter\GoodHighlighter', $highlighter);
         $this->assertEquals('/path/to/highlighter', $highlighter->path);
         $this->assertEquals('html', $highlighter->format);
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
+     * @covers Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
      */
     public function testHighlighterFactoryWithPygments()
     {
         $highlighter = HighlighterFactory::getHighlighter('pygments');
 
-        $this->assertInstanceOf('Rhumsaa\Twig\CodeBlock\Highlighter\PygmentsHighlighter', $highlighter);
+        $this->assertInstanceOf('Ramsey\Twig\CodeBlock\Highlighter\PygmentsHighlighter', $highlighter);
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
+     * @covers Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
      */
     public function testHighlighterFactoryWithNull()
     {
         $highlighter = HighlighterFactory::getHighlighter();
 
-        $this->assertInstanceOf('Rhumsaa\Twig\CodeBlock\Highlighter\PygmentsHighlighter', $highlighter);
+        $this->assertInstanceOf('Ramsey\Twig\CodeBlock\Highlighter\PygmentsHighlighter', $highlighter);
     }
 }
 

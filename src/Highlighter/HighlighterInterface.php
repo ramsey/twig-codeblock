@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Rhumsaa\Twig\CodeBlock extension for Twig
+ * This file is part of the Ramsey\Twig\CodeBlock extension for Twig
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -9,13 +9,13 @@
  * @license http://opensource.org/licenses/MIT MIT
  */
 
-namespace Rhumsaa\Twig\CodeBlock\Highlighter;
+namespace Ramsey\Twig\CodeBlock\Highlighter;
 
-use Rhumsaa\Twig\CodeBlock\TokenParser\CodeBlockParser;
+use Ramsey\Twig\CodeBlock\TokenParser\CodeBlockParser;
 
 /**
  * Enforces a common interface for all highlighters used by the
- * Rhumsaa\Twig\CodeBlock extension
+ * Ramsey\Twig\CodeBlock extension
  */
 interface HighlighterInterface
 {
@@ -24,7 +24,7 @@ interface HighlighterInterface
      *
      * @param string $code The source code to highlight
      * @param array $options Parsed codeblock options that may be used when highlighting
-     *    the code; see {@see Rhumsaa\Twig\CodeBlock\TokenParser\CodeBlockParser::$attributes}
+     *    the code; see {@see Ramsey\Twig\CodeBlock\TokenParser\CodeBlockParser::$attributes}
      *    for option details
      * @return string
      */

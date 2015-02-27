@@ -1,6 +1,6 @@
 {
-    "name": "rhumsaa/twig-codeblock",
-    "homepage": "https://github.com/ramsey/rhumsaa-twig-codeblock",
+    "name": "ramsey/twig-codeblock",
+    "homepage": "https://github.com/ramsey/twig-codeblock",
     "description": "A Twig extension for defining blocks of code for syntax highlighting (with Pygments) and more.",
     "keywords": ["twig", "extension", "syntax", "highlighting", "pygments", "pygmentize"],
     "type": "library",
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Rhumsaa\\Twig\\CodeBlock\\": "src/"
+            "Ramsey\\Twig\\CodeBlock\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Rhumsaa\\Tests\\Twig\\CodeBlock\\": "tests/"
+            "Ramsey\\Tests\\Twig\\CodeBlock\\": "tests/"
         }
     }
 }

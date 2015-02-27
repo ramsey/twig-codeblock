@@ -1,9 +1,9 @@
 <?php
 
-namespace Rhumsaa\Tests\Twig\CodeBlock\Node;
+namespace Ramsey\Tests\Twig\CodeBlock\Node;
 
-use Rhumsaa\Tests\Twig\CodeBlock\TestCase;
-use Rhumsaa\Twig\CodeBlock\Node\CodeBlockNode;
+use Ramsey\Tests\Twig\CodeBlock\TestCase;
+use Ramsey\Twig\CodeBlock\Node\CodeBlockNode;
 
 class CodeBlockNodeTest extends TestCase
 {
@@ -17,13 +17,13 @@ class CodeBlockNodeTest extends TestCase
     }
 
     /**
-     * @covers Rhumsaa\Twig\CodeBlock\Node\CodeBlockNode::__construct
-     * @covers Rhumsaa\Twig\CodeBlock\Node\CodeBlockNode::compile
+     * @covers Ramsey\Twig\CodeBlock\Node\CodeBlockNode::__construct
+     * @covers Ramsey\Twig\CodeBlock\Node\CodeBlockNode::compile
      */
     public function testCompile()
     {
         $expectedSource = <<<'EOD'
-$highlighter = \Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter("pygments", array(0 => "/usr/local/bin/pygmentize"));
+$highlighter = \Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter("pygments", array(0 => "/usr/local/bin/pygmentize"));
 echo $highlighter->highlight("<?php
 phpinfo();", array("lang" => "php", "format" => "bbcode", "linenos" => true, "start" => 1, "end" => 30, "mark" => "1,5-8,15-20,24", "phpopentag" => false));
 

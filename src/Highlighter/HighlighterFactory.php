@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Rhumsaa\Twig\CodeBlock extension for Twig
+ * This file is part of the Ramsey\Twig\CodeBlock extension for Twig
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -9,7 +9,7 @@
  * @license http://opensource.org/licenses/MIT MIT
  */
 
-namespace Rhumsaa\Twig\CodeBlock\Highlighter;
+namespace Ramsey\Twig\CodeBlock\Highlighter;
 
 /**
  * Factory to get a highlighter by name or by fully-qualified classname
@@ -33,7 +33,7 @@ class HighlighterFactory
         switch ($highlighter) {
             case 'pygments':
             case null:
-                $highlighterClass = 'Rhumsaa\Twig\CodeBlock\Highlighter\PygmentsHighlighter';
+                $highlighterClass = 'Ramsey\Twig\CodeBlock\Highlighter\PygmentsHighlighter';
                 break;
             default:
                 // A different class name must have been specified
@@ -47,7 +47,7 @@ class HighlighterFactory
             throw new \RuntimeException($e->getMessage());
         }
 
-        if ($reflection->implementsInterface('Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterInterface')) {
+        if ($reflection->implementsInterface('Ramsey\Twig\CodeBlock\Highlighter\HighlighterInterface')) {
             return $reflection->newInstanceArgs($arguments);
         }
 
@@ -55,7 +55,7 @@ class HighlighterFactory
             sprintf(
                 "'%s' must be an instance of '%s'",
                 $highlighterClass,
-                'Rhumsaa\Twig\CodeBlock\Highlighter\HighlighterInterface'
+                'Ramsey\Twig\CodeBlock\Highlighter\HighlighterInterface'
             )
         );
     }
