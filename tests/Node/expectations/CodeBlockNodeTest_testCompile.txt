@@ -1,0 +1,4 @@
+$highlighter = \Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter("pygments", array(0 => "/usr/local/bin/pygmentize"));
+$highlightedCode = $highlighter->highlight("<?php
+phpinfo();", array("lang" => "php", "format" => "bbcode", "linenos" => true, "start" => 1, "end" => 30, "mark" => "1,5-8,15-20,24", "phpopentag" => false));
+echo $highlightedCode;

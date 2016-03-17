@@ -3,6 +3,7 @@
 namespace Ramsey\Twig\CodeBlock\Test\Highlighter;
 
 use Ramsey\Twig\CodeBlock\Test\TestCase;
+use Ramsey\Twig\CodeBlock\Test\Mock\PygmentsMock;
 
 class PygmentsHighlighterTest extends TestCase
 {
@@ -95,29 +96,5 @@ class PygmentsHighlighterTest extends TestCase
         $this->assertEquals(null, $returnMock->lexer);
         $this->assertEquals('html', $returnMock->format);
         $this->assertEquals($expectedParsedOptions, $returnMock->options);
-    }
-}
-
-class PygmentsMock
-{
-    public $pygmentizePath;
-    public $code;
-    public $lexer;
-    public $format;
-    public $options;
-
-    public function __construct($pygmentizePath)
-    {
-        $this->pygmentizePath = $pygmentizePath;
-    }
-
-    public function highlight($code, $lexer, $format, $options)
-    {
-        $this->code = $code;
-        $this->lexer = $lexer;
-        $this->format = $format;
-        $this->options = $options;
-
-        return $this;
     }
 }

@@ -3,6 +3,7 @@
 namespace Ramsey\Twig\CodeBlock\Test\TokenParser;
 
 use Ramsey\Twig\CodeBlock\Test\TestCase;
+use Ramsey\Twig\CodeBlock\Test\Mock\ParserMock;
 use Ramsey\Twig\CodeBlock\CodeBlockExtension;
 use Ramsey\Twig\CodeBlock\TokenParser\CodeBlockParser;
 
@@ -15,7 +16,7 @@ class CodeBlockParserTest extends TestCase
         $loader = new \Twig_Loader_Filesystem(dirname(__DIR__) . '/twig');
         $this->env = new \Twig_Environment($loader, ['debug' => true]);
         $this->env->addExtension(new CodeBlockExtension('pygments', ['/foo/bin/pygmentize']));
-        $this->env->setParser(new MockParser($this->env));
+        $this->env->setParser(new ParserMock($this->env));
         $this->env->getParser()->setExpressionParser(
             new \Twig_ExpressionParser(
                 $this->env->getParser(),
@@ -194,18 +195,5 @@ class CodeBlockParserTest extends TestCase
             new \Twig_Token(\Twig_Token::NAME_TYPE, 'foo', 1),
             $stream
         ]);
-    }
-}
-
-class MockParser extends \Twig_Parser
-{
-    public function setStream($stream)
-    {
-        $this->stream = $stream;
-    }
-
-    public function setExpressionParser($expressionParser)
-    {
-        $this->expressionParser = $expressionParser;
     }
 }

@@ -1,0 +1,5 @@
+$highlighter = \Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter("pygments", array(0 => "/usr/local/bin/pygmentize"));
+$highlightedCode = $highlighter->highlight("<?php
+phpinfo();", array("format" => "html", "lang" => "php", "title" => "Test Title"));
+$figcaption = "<figcaption class=\"code-highlight-caption\"><span class=\"code-highlight-caption-title\">Test Title</span></figcaption>";
+echo sprintf("<figure class=\"code-highlight-figure\">%s%s</figure>\n", $figcaption, $highlightedCode);
