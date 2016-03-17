@@ -92,8 +92,6 @@ class PygmentsHighlighter implements HighlighterInterface
      */
     protected function parsePygmentsOptions(array $options)
     {
-        $pygmentsOptions = [];
-
         $pygmentsOptions = ['encoding' => 'utf-8'];
 
         if (!empty($options['linenos']) && $options['linenos'] === true) {

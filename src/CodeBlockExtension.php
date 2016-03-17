@@ -30,14 +30,14 @@ class CodeBlockExtension extends \Twig_Extension
      * Array of constructor arguments to pass to the $highlighterName class
      * upon instantiation
      *
-     * @var string
+     * @var array
      */
     protected $highlighterArgs;
 
     /**
      * Creates a codeblock Twig extension
      *
-     * @param string $highligherName Name or fully-qualified classname of the
+     * @param string $highlighterName Name or fully-qualified classname of the
      *     highlighter to use
      * @param array $highlighterArgs Array of constructor arguments to pass to
      *     the $highlighterName class upon instantiation

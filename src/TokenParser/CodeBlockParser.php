@@ -49,7 +49,7 @@ class CodeBlockParser extends \Twig_TokenParser
     /**
      * The code to highlight
      *
-     * @var string
+     * @var \Twig_NodeInterface
      */
     protected $body;
 
@@ -64,14 +64,14 @@ class CodeBlockParser extends \Twig_TokenParser
      * Array of constructor arguments to pass to the $highlighterName class
      * upon instantiation
      *
-     * @var string
+     * @var array
      */
     protected $highlighterArgs;
 
     /**
      * Creates a codeblock tag parser
      *
-     * @param string $highligherName Name or fully-qualified classname of the
+     * @param string $highlighterName Name or fully-qualified classname of the
      *     highlighter to use
      * @param array $highlighterArgs Array of constructor arguments to pass to
      *     the $highlighterName class upon instantiation
@@ -90,7 +90,7 @@ class CodeBlockParser extends \Twig_TokenParser
      */
     public function parse(\Twig_Token $token)
     {
-        $this->parseCodeBlock($token);
+        $this->parseCodeBlock();
 
         return new CodeBlockNode(
             $this->highlighterName,
@@ -137,7 +137,7 @@ class CodeBlockParser extends \Twig_TokenParser
     /**
      * Returns a token representing the codeblock source code
      *
-     * @return \Twig_Token
+     * @return \Twig_NodeInterface
      */
     public function getBody()
     {
@@ -146,10 +146,8 @@ class CodeBlockParser extends \Twig_TokenParser
 
     /**
      * Parses the options found on the codeblock tag for use by the node
-     *
-     * @param \Twig_Token $token The codeblock tag token
      */
-    protected function parseCodeBlock(\Twig_Token $token)
+    protected function parseCodeBlock()
     {
         $stream = $this->parser->getStream();
 
@@ -246,11 +244,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('lang', $token, $stream);
 
-        $stream->next();
-        $stream->expect(\Twig_Token::PUNCTUATION_TYPE); // colon (:) separator
-        $langValue = $stream->expect(\Twig_Token::NAME_TYPE);
-
-        return $langValue->getValue();
+        return $this->getNextExpectedValueFromStream($stream, \Twig_Token::NAME_TYPE);
     }
 
     /**
@@ -264,11 +258,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('format', $token, $stream);
 
-        $stream->next();
-        $stream->expect(\Twig_Token::PUNCTUATION_TYPE); // colon (:) separator
-        $formatValue = $stream->expect(\Twig_Token::NAME_TYPE);
-
-        return $formatValue->getValue();
+        return $this->getNextExpectedValueFromStream($stream, \Twig_Token::NAME_TYPE);
     }
 
     /**
@@ -282,11 +272,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('start', $token, $stream);
 
-        $stream->next();
-        $stream->expect(\Twig_Token::PUNCTUATION_TYPE); // colon (:) separator
-        $startValue = $stream->expect(\Twig_Token::NUMBER_TYPE);
-
-        return $startValue->getValue();
+        return $this->getNextExpectedValueFromStream($stream, \Twig_Token::NUMBER_TYPE);
     }
 
     /**
@@ -300,11 +286,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('end', $token, $stream);
 
-        $stream->next();
-        $stream->expect(\Twig_Token::PUNCTUATION_TYPE); // colon (:) separator
-        $endValue = $stream->expect(\Twig_Token::NUMBER_TYPE);
-
-        return $endValue->getValue();
+        return $this->getNextExpectedValueFromStream($stream, \Twig_Token::NUMBER_TYPE);
     }
 
     /**
@@ -319,9 +301,9 @@ class CodeBlockParser extends \Twig_TokenParser
         $this->testToken('range', $token, $stream);
 
         $stream->next();
-        $stream->expect(\Twig_Token::PUNCTUATION_TYPE); // colon (:) separator
+        $stream->expect(\Twig_Token::PUNCTUATION_TYPE);
         $rangeLeft = $stream->expect(\Twig_Token::NUMBER_TYPE);
-        $stream->expect(\Twig_Token::OPERATOR_TYPE); // range dash (-)
+        $stream->expect(\Twig_Token::OPERATOR_TYPE);
         $rangeRight = $stream->expect(\Twig_Token::NUMBER_TYPE);
 
         return $rangeLeft->getValue() . '-' . $rangeRight->getValue();
@@ -338,9 +320,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('mark', $token, $stream);
 
-        $stream->next();
-        $stream->expect(\Twig_Token::PUNCTUATION_TYPE); // colon (:) separator
-        $markValue = $stream->expect(\Twig_Token::NUMBER_TYPE)->getValue();
+        $markValue = $this->getNextExpectedValueFromStream($stream, \Twig_Token::NUMBER_TYPE);
 
         while ($stream->test(\Twig_Token::OPERATOR_TYPE)
             || $stream->test(\Twig_Token::PUNCTUATION_TYPE)
@@ -365,7 +345,7 @@ class CodeBlockParser extends \Twig_TokenParser
         $this->testToken('linenos', $token, $stream);
 
         $stream->next();
-        $stream->expect(\Twig_Token::PUNCTUATION_TYPE); // colon (:) separator
+        $stream->expect(\Twig_Token::PUNCTUATION_TYPE);
         $expr = $this->parser->getExpressionParser()->parseExpression();
 
         if (!($expr instanceof \Twig_Node_Expression_Constant) || !is_bool($expr->getAttribute('value'))) {
@@ -391,7 +371,7 @@ class CodeBlockParser extends \Twig_TokenParser
         $this->testToken('phpopentag', $token, $stream);
 
         $stream->next();
-        $stream->expect(\Twig_Token::PUNCTUATION_TYPE); // colon (:) separator
+        $stream->expect(\Twig_Token::PUNCTUATION_TYPE);
         $expr = $this->parser->getExpressionParser()->parseExpression();
 
         if (!($expr instanceof \Twig_Node_Expression_Constant) || !is_bool($expr->getAttribute('value'))) {
@@ -435,5 +415,20 @@ class CodeBlockParser extends \Twig_TokenParser
         } elseif (empty($this->attributes['linkText'])) {
             $this->attributes['linkText'] = $token->getValue();
         }
+    }
+
+    /**
+     * Helper method for the common operation of grabbing the next value from the stream
+     *
+     * @param \Twig_TokenStream $stream
+     * @param int $type
+     * @return string
+     */
+    protected function getNextExpectedValueFromStream(\Twig_TokenStream $stream, $type)
+    {
+        $stream->next();
+        $stream->expect(\Twig_Token::PUNCTUATION_TYPE);
+
+        return $stream->expect($type)->getValue();
     }
 }
