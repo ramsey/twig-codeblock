@@ -7,6 +7,8 @@ The {% codeblock %} extension for Twig is a port of the [Octopress codeblock liq
 
 By default, Codeblock uses the [Pygments Python syntax highlighter](http://pygments.org/) for generating HTML markup suitable for highlighting blocks of code. However, it is flexible enough to use any syntax highlighter of your choice; simply implement the `HighlighterInterface` and provide some additional configuration (see below for an example).
 
+This project adheres to a [Contributor Code of Conduct][conduct]. By participating in this project and its community, you are expected to uphold this code.
+
 ## Using the Codeblock tag
 
 To highlight blocks of code, start the code block with the `{% codeblock %}` tag and end it with the `{% endcodeblock %}` tag. For example:
@@ -177,3 +179,6 @@ If you have your own highlighter class that implements `Ramsey\Twig\CodeBlock\Hi
             arguments:
                 - Your\Own\Highlighter
                 - [arg1, arg2, arg3]
+
+
+[conduct]: https://github.com/ramsey/twig-codeblock/blob/master/CODE_OF_CONDUCT.md
