@@ -244,7 +244,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('lang', $token, $stream);
 
-        return $this->getNextExpectedValueFromStream($stream, \Twig_Token::NAME_TYPE);
+        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::NAME_TYPE);
     }
 
     /**
@@ -258,7 +258,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('format', $token, $stream);
 
-        return $this->getNextExpectedValueFromStream($stream, \Twig_Token::NAME_TYPE);
+        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::NAME_TYPE);
     }
 
     /**
@@ -272,7 +272,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('start', $token, $stream);
 
-        return $this->getNextExpectedValueFromStream($stream, \Twig_Token::NUMBER_TYPE);
+        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::NUMBER_TYPE);
     }
 
     /**
@@ -286,7 +286,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('end', $token, $stream);
 
-        return $this->getNextExpectedValueFromStream($stream, \Twig_Token::NUMBER_TYPE);
+        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::NUMBER_TYPE);
     }
 
     /**
@@ -320,7 +320,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('mark', $token, $stream);
 
-        $markValue = $this->getNextExpectedValueFromStream($stream, \Twig_Token::NUMBER_TYPE);
+        $markValue = $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::NUMBER_TYPE);
 
         while ($stream->test(\Twig_Token::OPERATOR_TYPE)
             || $stream->test(\Twig_Token::PUNCTUATION_TYPE)
@@ -344,19 +344,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('linenos', $token, $stream);
 
-        $stream->next();
-        $stream->expect(\Twig_Token::PUNCTUATION_TYPE);
-        $expr = $this->parser->getExpressionParser()->parseExpression();
-
-        if (!($expr instanceof \Twig_Node_Expression_Constant) || !is_bool($expr->getAttribute('value'))) {
-            throw new SyntaxException(
-                'The linenos option must be boolean true or false (i.e. linenos:false)',
-                $stream->getCurrent()->getLine(),
-                $stream->getFilename()
-            );
-        }
-
-        return $expr->getAttribute('value');
+        return $this->getNextExpectedBoolValueFromStream($stream, 'linenos');
     }
 
     /**
@@ -370,19 +358,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('phpopentag', $token, $stream);
 
-        $stream->next();
-        $stream->expect(\Twig_Token::PUNCTUATION_TYPE);
-        $expr = $this->parser->getExpressionParser()->parseExpression();
-
-        if (!($expr instanceof \Twig_Node_Expression_Constant) || !is_bool($expr->getAttribute('value'))) {
-            throw new SyntaxException(
-                'The phpopentag option must be boolean true or false (i.e. phpopentag:false)',
-                $stream->getCurrent()->getLine(),
-                $stream->getFilename()
-            );
-        }
-
-        return $expr->getAttribute('value');
+        return $this->getNextExpectedBoolValueFromStream($stream, 'phpopentag');
     }
 
     /**
@@ -418,17 +394,51 @@ class CodeBlockParser extends \Twig_TokenParser
     }
 
     /**
-     * Helper method for the common operation of grabbing the next value from the stream
+     * Helper method for the common operation of grabbing the next string value
+     * from the stream
      *
      * @param \Twig_TokenStream $stream
      * @param int $type
      * @return string
      */
-    protected function getNextExpectedValueFromStream(\Twig_TokenStream $stream, $type)
-    {
+    protected function getNextExpectedStringValueFromStream(
+        \Twig_TokenStream $stream,
+        $type
+    ) {
         $stream->next();
         $stream->expect(\Twig_Token::PUNCTUATION_TYPE);
 
         return $stream->expect($type)->getValue();
+    }
+
+    /**
+     * Helper method for the common operation of grabbing the next boolean value
+     * from the stream
+     *
+     * @param \Twig_TokenStream $stream
+     * @param string $optionName
+     * @return string
+     */
+    protected function getNextExpectedBoolValueFromStream(
+        \Twig_TokenStream $stream,
+        $optionName
+    ) {
+        $stream->next();
+        $stream->expect(\Twig_Token::PUNCTUATION_TYPE);
+        $expr = $this->parser->getExpressionParser()->parseExpression();
+
+        if (!($expr instanceof \Twig_Node_Expression_Constant) || !is_bool($expr->getAttribute('value'))) {
+            throw new SyntaxException(
+                sprintf(
+                    'The %s option must be boolean true or false (i.e. %s:false)',
+                    $optionName,
+                    $optionName
+                ),
+                $stream->getCurrent()->getLine(),
+                $stream->getFilename()
+            );
+        }
+
+        return $expr->getAttribute('value');
     }
 }
