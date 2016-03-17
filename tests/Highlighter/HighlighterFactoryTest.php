@@ -1,8 +1,8 @@
 <?php
 
-namespace Ramsey\Tests\Twig\CodeBlock\Highlighter;
+namespace Ramsey\Twig\CodeBlock\Test\Highlighter;
 
-use Ramsey\Tests\Twig\CodeBlock\TestCase;
+use Ramsey\Twig\CodeBlock\Test\TestCase;
 use Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory;
 use Ramsey\Twig\CodeBlock\Highlighter\HighlighterInterface;
 
@@ -21,13 +21,13 @@ class HighlighterFactoryTest extends TestCase
     /**
      * @covers Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter
      * @expectedException RuntimeException
-     * @expectedExceptionMessage 'Ramsey\Tests\Twig\CodeBlock\Highlighter\BadHighlighter'
+     * @expectedExceptionMessage 'Ramsey\Twig\CodeBlock\Test\Highlighter\BadHighlighter'
      *     must be an instance of 'Ramsey\Twig\CodeBlock\Highlighter\HighlighterInterface'
      */
     public function testHighlighterFactoryClassNotInstanceOfHighlighterInterface()
     {
         $highlighter = HighlighterFactory::getHighlighter(
-            'Ramsey\Tests\Twig\CodeBlock\Highlighter\BadHighlighter'
+            'Ramsey\Twig\CodeBlock\Test\Highlighter\BadHighlighter'
         );
     }
 
@@ -48,14 +48,14 @@ class HighlighterFactoryTest extends TestCase
     public function testHighlighterFactoryHighlighterClassnameArgs()
     {
         $highlighter = HighlighterFactory::getHighlighter(
-            'Ramsey\Tests\Twig\CodeBlock\Highlighter\GoodHighlighter',
+            'Ramsey\Twig\CodeBlock\Test\Highlighter\GoodHighlighter',
             [
                 '/path/to/highlighter',
                 'html'
             ]
         );
 
-        $this->assertInstanceOf('Ramsey\Tests\Twig\CodeBlock\Highlighter\GoodHighlighter', $highlighter);
+        $this->assertInstanceOf('Ramsey\Twig\CodeBlock\Test\Highlighter\GoodHighlighter', $highlighter);
         $this->assertEquals('/path/to/highlighter', $highlighter->path);
         $this->assertEquals('html', $highlighter->format);
     }

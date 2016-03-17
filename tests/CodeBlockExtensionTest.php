@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramsey\Tests\Twig\CodeBlock;
+namespace Ramsey\Twig\CodeBlock\Test;
 
 use Ramsey\Twig\CodeBlock\CodeBlockExtension;
 

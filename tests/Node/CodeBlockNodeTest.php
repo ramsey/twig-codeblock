@@ -1,8 +1,8 @@
 <?php
 
-namespace Ramsey\Tests\Twig\CodeBlock\Node;
+namespace Ramsey\Twig\CodeBlock\Test\Node;
 
-use Ramsey\Tests\Twig\CodeBlock\TestCase;
+use Ramsey\Twig\CodeBlock\Test\TestCase;
 use Ramsey\Twig\CodeBlock\Node\CodeBlockNode;
 
 class CodeBlockNodeTest extends TestCase

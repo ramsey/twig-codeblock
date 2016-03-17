@@ -34,7 +34,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Ramsey\\Tests\\Twig\\CodeBlock\\": "tests/"
+            "Ramsey\\Twig\\CodeBlock\\Test\\": "tests/"
         }
     }
 }

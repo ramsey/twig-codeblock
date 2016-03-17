@@ -1,8 +1,8 @@
 <?php
 
-namespace Ramsey\Tests\Twig\CodeBlock\TokenParser;
+namespace Ramsey\Twig\CodeBlock\Test\TokenParser;
 
-use Ramsey\Tests\Twig\CodeBlock\TestCase;
+use Ramsey\Twig\CodeBlock\Test\TestCase;
 use Ramsey\Twig\CodeBlock\CodeBlockExtension;
 use Ramsey\Twig\CodeBlock\TokenParser\CodeBlockParser;
 

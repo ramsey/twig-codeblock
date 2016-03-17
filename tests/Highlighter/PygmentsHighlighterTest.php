@@ -1,8 +1,8 @@
 <?php
 
-namespace Ramsey\Tests\Twig\CodeBlock\Highlighter;
+namespace Ramsey\Twig\CodeBlock\Test\Highlighter;
 
-use Ramsey\Tests\Twig\CodeBlock\TestCase;
+use Ramsey\Twig\CodeBlock\Test\TestCase;
 
 class PygmentsHighlighterTest extends TestCase
 {
