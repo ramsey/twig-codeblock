@@ -3,4 +3,3 @@
 /.travis.yml      export-ignore
 /tests            export-ignore
 /phpunit.xml.dist export-ignore
-/apigen.neon      export-ignore
