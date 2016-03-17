@@ -1,7 +1,13 @@
 # Codeblock Extension for Twig
 
-[![Build Status](https://travis-ci.org/ramsey/twig-codeblock.svg?branch=master)](https://travis-ci.org/ramsey/twig-codeblock)
-[![Coverage Status](https://coveralls.io/repos/ramsey/twig-codeblock/badge.svg?branch=master)](https://coveralls.io/r/ramsey/twig-codeblock?branch=master)
+[![Source Code][badge-source]][source]
+[![Latest Version][badge-release]][release]
+[![Software License][badge-license]][license]
+[![Build Status][badge-build]][build]
+[![HHVM Status][badge-hhvm]][hhvm]
+[![Scrutinizer][badge-quality]][quality]
+[![Coverage Status][badge-coverage]][coverage]
+[![Total Downloads][badge-downloads]][downloads]
 
 The {% codeblock %} extension for Twig is a port of the [Octopress codeblock liquid tag](https://github.com/octopress/codeblock) for use with the [Twig template engine for PHP](http://twig.sensiolabs.org/).
 
@@ -182,3 +188,21 @@ If you have your own highlighter class that implements `Ramsey\Twig\CodeBlock\Hi
 
 
 [conduct]: https://github.com/ramsey/twig-codeblock/blob/master/CODE_OF_CONDUCT.md
+
+[badge-source]: http://img.shields.io/badge/source-ramsey/twig--codeblock-blue.svg?style=flat-square
+[badge-release]: https://img.shields.io/github/release/ramsey/twig-codeblock.svg?style=flat-square
+[badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[badge-build]: https://img.shields.io/travis/ramsey/twig-codeblock/master.svg?style=flat-square
+[badge-hhvm]: https://img.shields.io/hhvm/ramsey/twig-codeblock.svg?style=flat-square
+[badge-quality]: https://img.shields.io/scrutinizer/g/ramsey/twig-codeblock/master.svg?style=flat-square
+[badge-coverage]: https://img.shields.io/coveralls/ramsey/twig-codeblock/master.svg?style=flat-square
+[badge-downloads]: https://img.shields.io/packagist/dt/ramsey/twig-codeblock.svg?style=flat-square
+
+[source]: https://github.com/ramsey/twig-codeblock
+[release]: https://github.com/ramsey/twig-codeblock/releases
+[license]: https://github.com/ramsey/twig-codeblock/blob/master/LICENSE
+[build]: https://travis-ci.org/ramsey/twig-codeblock
+[hhvm]: http://hhvm.h4cc.de/package/ramsey/twig-codeblock
+[quality]: https://scrutinizer-ci.com/g/ramsey/twig-codeblock/
+[coverage]: https://coveralls.io/r/ramsey/twig-codeblock?branch=master
+[downloads]: https://packagist.org/packages/ramsey/twig-codeblock
