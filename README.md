@@ -187,7 +187,19 @@ If you have your own highlighter class that implements `Ramsey\Twig\CodeBlock\Hi
                 - [arg1, arg2, arg3]
 
 
+## Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING][] for details.
+
+
+## Copyright and license
+
+The ramsey/uuid library is copyright © [Ben Ramsey](https://benramsey.com/) and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
+
+
+
 [conduct]: https://github.com/ramsey/twig-codeblock/blob/master/CODE_OF_CONDUCT.md
+[contributing]: https://github.com/ramsey/twig-codeblock/blob/master/CONTRIBUTING.md
 
 [badge-source]: http://img.shields.io/badge/source-ramsey/twig--codeblock-blue.svg?style=flat-square
 [badge-release]: https://img.shields.io/github/release/ramsey/twig-codeblock.svg?style=flat-square
