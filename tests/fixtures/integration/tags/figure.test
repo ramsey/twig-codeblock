@@ -1,0 +1,28 @@
+--TEST--
+codeblock figure test with line numbers, marked lines, and title
+--TEMPLATE--
+{% codeblock lang:php phpopentag:false start:11 mark:3,8 "Methods on a Class" "http://example.com/full-listing" %}
+public function __construct(BazInterface $baz)
+{
+    $this->baz = $baz;
+}
+
+public function doIt()
+{
+    return $this->baz->do('it');
+}
+{% endcodeblock %}
+--DATA--
+return array()
+--EXPECT--
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">Methods on a Class</span><a class="code-highlight-caption-link" href="http://example.com/full-listing">link</a></figcaption><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">BazInterface</span> <span class="nv">$baz</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="hll">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">baz</span> <span class="o">=</span> <span class="nv">$baz</span><span class="p">;</span>
+</span><span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">doIt</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="hll">    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">baz</span><span class="o">-&gt;</span><span class="na">do</span><span class="p">(</span><span class="s1">&#39;it&#39;</span><span class="p">);</span>
+</span><span class="p">}</span>
+</pre></div>
+</figure>
