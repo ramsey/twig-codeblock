@@ -169,7 +169,6 @@ class CodeBlockParser extends \Twig_TokenParser
     protected function parseEncounteredToken(\Twig_Token $token, \Twig_TokenStream $stream)
     {
         switch ($token->getValue()) {
-
             case 'lang':
                 $this->attributes['lang'] = $this->parseLangOption($token, $stream);
                 break;
@@ -208,7 +207,6 @@ class CodeBlockParser extends \Twig_TokenParser
                 }
                 $stream->next();
                 break;
-
         }
     }
 
