@@ -9,6 +9,7 @@ class IntegrationTest extends \Twig_Test_IntegrationTestCase
     public function getExtensions()
     {
         return [
+            // Defaults to using pygmentize
             new CodeBlockExtension(),
         ];
     }

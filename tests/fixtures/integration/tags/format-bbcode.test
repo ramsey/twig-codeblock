@@ -1,0 +1,48 @@
+--TEST--
+Test codeblock tag with format option set to "bbcode"
+--TEMPLATE--
+{% codeblock lang:php format:bbcode %}
+<?php
+namespace Foo;
+
+/**
+ * Awesome Contrived Example.
+ */
+class Bar implements BarInterface
+{
+    private $baz;
+
+    public function __construct(BazInterface $baz)
+    {
+        $this->baz = $baz;
+    }
+
+    public function doIt()
+    {
+        return $this->baz->do('it');
+    }
+}
+{% endcodeblock %}
+--DATA--
+return array()
+--EXPECT--
+[color=#BC7A00]<?php[/color]
+[color=#008000][b]namespace[/b][/color] Foo;
+
+[color=#BA2121][i]/**
+ * Awesome Contrived Example.
+ */[/i][/color]
+[color=#008000][b]class[/b][/color] [color=#0000FF][b]Bar[/b][/color] [color=#008000][b]implements[/b][/color] BarInterface
+{
+    [color=#008000][b]private[/b][/color] [color=#19177C]$baz[/color];
+
+    [color=#008000][b]public[/b][/color] [color=#008000][b]function[/b][/color] [color=#0000FF]__construct[/color](BazInterface [color=#19177C]$baz[/color])
+    {
+        [color=#19177C]$this[/color][color=#666666]->[/color][color=#7D9029]baz[/color] [color=#666666]=[/color] [color=#19177C]$baz[/color];
+    }
+
+    [color=#008000][b]public[/b][/color] [color=#008000][b]function[/b][/color] [color=#0000FF]doIt[/color]()
+    {
+        [color=#008000][b]return[/b][/color] [color=#19177C]$this[/color][color=#666666]->[/color][color=#7D9029]baz[/color][color=#666666]->[/color][color=#7D9029]do[/color]([color=#BA2121]'it'[/color]);
+    }
+}

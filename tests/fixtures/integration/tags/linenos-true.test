@@ -1,7 +1,7 @@
 --TEST--
-Basic codeblock tag test, without any options or attributes
+Test "linenos" set to "true" is no different than basic.test
 --TEMPLATE--
-{% codeblock %}
+{% codeblock linenos:true %}
 <?php
 namespace Foo;
 

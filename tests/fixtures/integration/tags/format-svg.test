@@ -1,0 +1,53 @@
+--TEST--
+Test codeblock tag with format option set to "svg"
+--TEMPLATE--
+{% codeblock lang:php format:svg %}
+<?php
+namespace Foo;
+
+/**
+ * Awesome Contrived Example.
+ */
+class Bar implements BarInterface
+{
+    private $baz;
+
+    public function __construct(BazInterface $baz)
+    {
+        $this->baz = $baz;
+    }
+
+    public function doIt()
+    {
+        return $this->baz->do('it');
+    }
+}
+{% endcodeblock %}
+--DATA--
+return array()
+--EXPECT--
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<g font-family="monospace" font-size="14px">
+<text x="0" y="14" xml:space="preserve"><tspan fill="#BC7A00">&lt;?php</tspan></text>
+<text x="0" y="33" xml:space="preserve"><tspan fill="#008000" font-weight="bold">namespace</tspan>&#160;Foo;</text>
+<text x="0" y="52" xml:space="preserve"></text>
+<text x="0" y="71" xml:space="preserve"><tspan fill="#BA2121" font-style="italic">/**</tspan></text>
+<text x="0" y="90" xml:space="preserve"><tspan fill="#BA2121" font-style="italic">&#160;*&#160;Awesome&#160;Contrived&#160;Example.</tspan></text>
+<text x="0" y="109" xml:space="preserve"><tspan fill="#BA2121" font-style="italic">&#160;*/</tspan></text>
+<text x="0" y="128" xml:space="preserve"><tspan fill="#008000" font-weight="bold">class</tspan>&#160;<tspan fill="#0000FF" font-weight="bold">Bar</tspan>&#160;<tspan fill="#008000" font-weight="bold">implements</tspan>&#160;BarInterface</text>
+<text x="0" y="147" xml:space="preserve">{</text>
+<text x="0" y="166" xml:space="preserve">&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">private</tspan>&#160;<tspan fill="#19177C">$baz</tspan>;</text>
+<text x="0" y="185" xml:space="preserve"></text>
+<text x="0" y="204" xml:space="preserve">&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">public</tspan>&#160;<tspan fill="#008000" font-weight="bold">function</tspan>&#160;<tspan fill="#0000FF">__construct</tspan>(BazInterface&#160;<tspan fill="#19177C">$baz</tspan>)</text>
+<text x="0" y="223" xml:space="preserve">&#160;&#160;&#160;&#160;{</text>
+<text x="0" y="242" xml:space="preserve">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan fill="#19177C">$this</tspan><tspan fill="#666666">-&gt;</tspan><tspan fill="#7D9029">baz</tspan>&#160;<tspan fill="#666666">=</tspan>&#160;<tspan fill="#19177C">$baz</tspan>;</text>
+<text x="0" y="261" xml:space="preserve">&#160;&#160;&#160;&#160;}</text>
+<text x="0" y="280" xml:space="preserve"></text>
+<text x="0" y="299" xml:space="preserve">&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">public</tspan>&#160;<tspan fill="#008000" font-weight="bold">function</tspan>&#160;<tspan fill="#0000FF">doIt</tspan>()</text>
+<text x="0" y="318" xml:space="preserve">&#160;&#160;&#160;&#160;{</text>
+<text x="0" y="337" xml:space="preserve">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">return</tspan>&#160;<tspan fill="#19177C">$this</tspan><tspan fill="#666666">-&gt;</tspan><tspan fill="#7D9029">baz</tspan><tspan fill="#666666">-&gt;</tspan><tspan fill="#7D9029">do</tspan>(<tspan fill="#BA2121">&#39;it&#39;</tspan>);</text>
+<text x="0" y="356" xml:space="preserve">&#160;&#160;&#160;&#160;}</text>
+<text x="0" y="375" xml:space="preserve">}</text>
+<text x="0" y="394" xml:space="preserve"></text></g></svg>

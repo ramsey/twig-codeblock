@@ -1,0 +1,66 @@
+--TEST--
+Test syntax highlighting without the PHP open tag
+--TEMPLATE--
+{% codeblock lang:php %}
+namespace Foo;
+
+/**
+ * Awesome Contrived Example.
+ */
+class Bar implements BarInterface
+{
+    private $baz;
+
+    public function __construct(BazInterface $baz)
+    {
+        $this->baz = $baz;
+    }
+
+    public function doIt()
+    {
+        return $this->baz->do('it');
+    }
+}
+{% endcodeblock %}
+--DATA--
+return array()
+--EXPECT--
+<figure class="code-highlight-figure"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="x">namespace Foo;</span>
+
+<span class="x">/**</span>
+<span class="x"> * Awesome Contrived Example.</span>
+<span class="x"> */</span>
+<span class="x">class Bar implements BarInterface</span>
+<span class="x">{</span>
+<span class="x">    private $baz;</span>
+
+<span class="x">    public function __construct(BazInterface $baz)</span>
+<span class="x">    {</span>
+<span class="x">        $this-&gt;baz = $baz;</span>
+<span class="x">    }</span>
+
+<span class="x">    public function doIt()</span>
+<span class="x">    {</span>
+<span class="x">        return $this-&gt;baz-&gt;do(&#39;it&#39;);</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+</td></tr></table></figure>

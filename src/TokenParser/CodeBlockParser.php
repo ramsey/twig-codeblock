@@ -222,9 +222,9 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         if (!$token->test($value)) {
             throw new RuntimeException(
-                sprintf("Expected '%s' token but received '%s' instead", $value, $token->getValue()),
+                sprintf("Expected '%s' token but received '%s' instead.", $value, $token->getValue()),
                 $stream->getCurrent()->getLine(),
-                $stream->getFilename()
+                $stream->getSourceContext()->getName()
             );
         }
 
@@ -428,12 +428,12 @@ class CodeBlockParser extends \Twig_TokenParser
         if (!($expr instanceof \Twig_Node_Expression_Constant) || !is_bool($expr->getAttribute('value'))) {
             throw new SyntaxException(
                 sprintf(
-                    'The %s option must be boolean true or false (i.e. %s:false)',
+                    'The %s option must be boolean true or false (i.e. %s:false).',
                     $optionName,
                     $optionName
                 ),
                 $stream->getCurrent()->getLine(),
-                $stream->getFilename()
+                $stream->getSourceContext()->getName()
             );
         }
 

@@ -1,0 +1,29 @@
+--TEST--
+Exception for unrecognized "linenos" value
+--TEMPLATE--
+{% codeblock lang:php linenos:foobar %}
+<?php
+namespace Foo;
+
+/**
+ * Awesome Contrived Example.
+ */
+class Bar implements BarInterface
+{
+    private $baz;
+
+    public function __construct(BazInterface $baz)
+    {
+        $this->baz = $baz;
+    }
+
+    public function doIt()
+    {
+        return $this->baz->do('it');
+    }
+}
+{% endcodeblock %}
+--DATA--
+return array()
+--EXCEPTION--
+Ramsey\Twig\CodeBlock\Exception\SyntaxException: The linenos option must be boolean true or false (i.e. linenos:false) in "index.twig" at line 2.

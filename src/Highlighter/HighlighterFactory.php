@@ -53,7 +53,7 @@ class HighlighterFactory
 
         throw new \RuntimeException(
             sprintf(
-                "'%s' must be an instance of '%s'",
+                "'%s' must be an instance of '%s'.",
                 $highlighterClass,
                 'Ramsey\Twig\CodeBlock\Highlighter\HighlighterInterface'
             )
