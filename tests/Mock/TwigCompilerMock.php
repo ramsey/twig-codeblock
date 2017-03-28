@@ -9,7 +9,7 @@ class TwigCompilerMock extends \Twig_Compiler
         // Override parent method for mock
     }
 
-    public function addDebugInfo(\Twig_NodeInterface $node)
+    public function addDebugInfo(\Twig_Node $node)
     {
         // Override parent method for mock
     }

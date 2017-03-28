@@ -47,7 +47,7 @@ class CodeBlockNode extends \Twig_Node
         $highlighterName,
         array $highlighterArgs,
         array $attributes,
-        \Twig_NodeInterface $body,
+        \Twig_Node $body,
         $lineno,
         $tag = 'codeblock'
     ) {

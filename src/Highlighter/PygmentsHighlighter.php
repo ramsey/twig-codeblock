@@ -11,11 +11,11 @@
 
 namespace Ramsey\Twig\CodeBlock\Highlighter;
 
-use KzykHys\Pygments\Pygments;
+use Ramsey\Pygments\Pygments;
 
 /**
  * A syntax-highlighter that uses [Python Pygments](http://pygments.org/) and
- * the [kzykhys/pygments](https://github.com/kzykhys/Pygments.php) library for
+ * the [ramsey/pygments](https://github.com/ramsey/pygments) library for
  * highlighting
  */
 class PygmentsHighlighter implements HighlighterInterface
