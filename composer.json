@@ -2,8 +2,14 @@
     "name": "ramsey/twig-codeblock",
     "description": "A Twig extension for defining blocks of code for syntax highlighting (with Pygments) and more.",
     "type": "library",
-    "keywords": ["twig", "extension", "syntax", "highlighting", "pygments", "pygmentize"],
-    "homepage": "https://github.com/ramsey/twig-codeblock",
+    "keywords": [
+        "extension",
+        "highlighting",
+        "pygmentize",
+        "pygments",
+        "syntax",
+        "twig"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -12,10 +18,6 @@
             "homepage": "http://benramsey.com"
         }
     ],
-    "support": {
-        "issues": "https://github.com/ramsey/twig-codeblock/issues",
-        "source": "https://github.com/ramsey/twig-codeblock"
-    },
     "require": {
         "php": ">=5.4.0",
         "twig/twig": "^1.15",
