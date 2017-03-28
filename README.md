@@ -78,7 +78,7 @@ A more complex example:
 ## Output
 
 If using "html" as the format output (which is the default), the resulting HTML output will wrap the highlighted code in a `<figure>` element. If you have provided a title and link, a `<figcaption>` will also be present.
-    
+
 Here's an example of HTML output that Pygments might generate, including the figure and figcaption elements provided by Codeblock (cleaned up for readability):
 
 ``` html
@@ -153,62 +153,100 @@ To see more, type the following from the command line:
 
 By default, Codeblock uses Pygments and, if `pygmentize` is in your `PATH`, then you do not need to pass any arguments.
 
-    services:
-        ramsey.twig.codeblock_extension:
-            class: Ramsey\Twig\CodeBlock\CodeBlockExtension
-            tags:
-                - { name: twig.extension }
+### With pure PHP
 
-However, if `pygmentize` is not in the `PATH`, then you may specify its location, like this:
+``` php
+use Ramsey\Twig\CodeBlock\CodeBlockExtension;
 
-    services:
-        ramsey.twig.codeblock_extension:
-            class: Ramsey\Twig\CodeBlock\CodeBlockExtension
-            tags:
-                - { name: twig.extension }
-            arguments:
-                - pygments
-                - [/usr/local/bin/pygmentize]
+$env = new Twig_Environment(new Twig_Loader_Filesystem('/path/to/templates'));
+$env->addExtension(new CodeBlockExtension());
+```
 
+If `pygmentize` is not in the `PATH`, you may specify its location:
+
+``` php
+use Ramsey\Twig\CodeBlock\CodeBlockExtension;
+
+$env = new Twig_Environment(new Twig_Loader_Filesystem('/path/to/templates'));
+$env->addExtension(
+    new CodeBlockExtension('pygments', ['/usr/local/bin/pygmentize'])
+);
+```
+
+### Register as a Symfony service
+
+``` yaml
+# app/config/services.yml
+services:
+    ramsey.twig.codeblock_extension:
+        class: Ramsey\Twig\CodeBlock\CodeBlockExtension
+        tags:
+            - { name: twig.extension }
+```
+
+If `pygmentize` is not in the `PATH`, you may specify its location:
+
+``` yaml
+# app/config/services.yml
+services:
+    ramsey.twig.codeblock_extension:
+        class: Ramsey\Twig\CodeBlock\CodeBlockExtension
+        tags:
+            - { name: twig.extension }
+        arguments:
+            - pygments
+            - [/usr/local/bin/pygmentize]
+```
 
 ## Using your own highlighter
 
 If you have your own highlighter class that implements `Ramsey\Twig\CodeBlock\Highlighter\HighlighterInterface`, then you may specify the fully-qualified classname as the first argument to the extension. The second argument is an array of 0-indexed values that will be passed as arguments to your class constructor. Make sure that you specify them in the correct order as your constructor requires.
 
-    services:
-        ramsey.twig.codeblock_extension:
-            class: Ramsey\Twig\CodeBlock\CodeBlockExtension
-            tags:
-                - { name: twig.extension }
-            arguments:
-                - Your\Own\Highlighter
-                - [arg1, arg2, arg3]
+### With pure PHP
 
+``` php
+use Ramsey\Twig\CodeBlock\CodeBlockExtension;
+
+$env = new Twig_Environment(new Twig_Loader_Filesystem('/path/to/templates'));
+$env->addExtension(
+    new CodeBlockExtension('Your\\Own\\Highlighter', ['arg1', 'arg2', 'arg3'])
+);
+```
+
+### Register as a Symfony service
+
+``` yaml
+# app/config/services.yml
+services:
+    ramsey.twig.codeblock_extension:
+        class: Ramsey\Twig\CodeBlock\CodeBlockExtension
+        tags:
+            - { name: twig.extension }
+        arguments:
+            - Your\Own\Highlighter
+            - [arg1, arg2, arg3]
+```
 
 ## Contributing
 
 Contributions are welcome! Please read [CONTRIBUTING][] for details.
-
 
 ## Copyright and license
 
 The ramsey/uuid library is copyright © [Ben Ramsey](https://benramsey.com/) and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
 
-
-[conduct]: https://github.com/ramsey/twig-codeblock/blob/master/CODE_OF_CONDUCT.md
-[contributing]: https://github.com/ramsey/twig-codeblock/blob/master/CONTRIBUTING.md
-
-[badge-source]: http://img.shields.io/badge/source-ramsey/twig--codeblock-blue.svg?style=flat-square
-[badge-release]: https://img.shields.io/github/release/ramsey/twig-codeblock.svg?style=flat-square
-[badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [badge-build]: https://img.shields.io/travis/ramsey/twig-codeblock/master.svg?style=flat-square
 [badge-coverage]: https://img.shields.io/coveralls/ramsey/twig-codeblock/master.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/ramsey/twig-codeblock.svg?style=flat-square
-
-[source]: https://github.com/ramsey/twig-codeblock
-[release]: https://github.com/ramsey/twig-codeblock/releases
-[license]: https://github.com/ramsey/twig-codeblock/blob/master/LICENSE
+[badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[badge-release]: https://img.shields.io/github/release/ramsey/twig-codeblock.svg?style=flat-square
+[badge-source]: http://img.shields.io/badge/source-ramsey/twig--codeblock-blue.svg?style=flat-square
 [build]: https://travis-ci.org/ramsey/twig-codeblock
+[conduct]: https://github.com/ramsey/twig-codeblock/blob/master/CODE_OF_CONDUCT.md
+[contributing]: https://github.com/ramsey/twig-codeblock/blob/master/CONTRIBUTING.md
 [coverage]: https://coveralls.io/r/ramsey/twig-codeblock?branch=master
 [downloads]: https://packagist.org/packages/ramsey/twig-codeblock
+[license]: https://github.com/ramsey/twig-codeblock/blob/master/LICENSE
+[release]: https://github.com/ramsey/twig-codeblock/releases
+[source]: https://github.com/ramsey/twig-codeblock
