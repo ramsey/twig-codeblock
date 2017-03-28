@@ -20,7 +20,7 @@ class CodeBlockNodeTest extends TestCase
     public function testCompile()
     {
         $expectedSource = file_get_contents(
-            __DIR__ . '/expectations/CodeBlockNodeTest_testCompile.txt'
+            dirname(__DIR__) . '/fixtures/expectations/CodeBlockNodeTest_testCompile.txt'
         );
 
         $node = new CodeBlockNode(
@@ -50,7 +50,7 @@ class CodeBlockNodeTest extends TestCase
     public function testCompileWithTitle()
     {
         $expectedSource = file_get_contents(
-            __DIR__ . '/expectations/CodeBlockNodeTest_testCompileWithTitle.txt'
+            dirname(__DIR__) . '/fixtures/expectations/CodeBlockNodeTest_testCompileWithTitle.txt'
         );
 
         $node = new CodeBlockNode(
@@ -76,7 +76,7 @@ class CodeBlockNodeTest extends TestCase
     public function testCompileWithLinkUrl()
     {
         $expectedSource = file_get_contents(
-            __DIR__ . '/expectations/CodeBlockNodeTest_testCompileWithLinkUrl.txt'
+            dirname(__DIR__) . '/fixtures/expectations/CodeBlockNodeTest_testCompileWithLinkUrl.txt'
         );
 
         $node = new CodeBlockNode(
@@ -103,7 +103,7 @@ class CodeBlockNodeTest extends TestCase
     public function testCompileWithLinkText()
     {
         $expectedSource = file_get_contents(
-            __DIR__ . '/expectations/CodeBlockNodeTest_testCompileWithLinkText.txt'
+            dirname(__DIR__) . '/fixtures/expectations/CodeBlockNodeTest_testCompileWithLinkText.txt'
         );
 
         $node = new CodeBlockNode(

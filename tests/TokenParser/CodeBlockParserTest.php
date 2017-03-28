@@ -13,7 +13,7 @@ class CodeBlockParserTest extends TestCase
 
     public function setUp()
     {
-        $loader = new \Twig_Loader_Filesystem(dirname(__DIR__) . '/twig');
+        $loader = new \Twig_Loader_Filesystem(dirname(__DIR__) . '/fixtures/templates');
         $this->env = new \Twig_Environment($loader, ['debug' => true]);
         $this->env->addExtension(new CodeBlockExtension('pygments', ['/foo/bin/pygmentize']));
         $this->env->setParser(new ParserMock($this->env));
