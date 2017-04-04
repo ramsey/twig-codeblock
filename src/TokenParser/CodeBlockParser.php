@@ -28,23 +28,24 @@ class CodeBlockParser extends \Twig_TokenParser
      * * `linenos`: `true` if line numbers should be included in the
      *     highlighted code
      * * `start`: Starting line number for the code, if linenos is true
-     * * `end`: Ending line number for the code, if linenos is true
-     * * `range`: Provides starting and ending line numbers, if linenos is true
-     *     (overrides start and end)
      * * `mark`: Mark one or more lines of code in the output. Accepts one
      *     number, numbers separated by commas, and number ranges. Example
      *     `mark:1,5-8` will mark lines 1,5,6,7,8. Note: If you've changed the
      *     beginning line number be sure these match rendered line numbers
+     * * `class`: Add CSS class names to the code `<figure>` element
+     * * `title`: The figcaption title for the code block
+     * * `link`: Download or reference link for the code
+     * * `link_text`: Text for the `link`, defaults to "link"
      * * `phpopentag`: (PHP specific) if lang is "php" and the code to highlight
      *     should not require a starting `<?php` tag, then set this to `false`;
      *     defaults to `true`
-     * * `title`: The figcaption title for the code block
-     * * `linkUrl`: Download or reference link for the code
-     * * `linkText`: Text for the linkUrl, defaults to "link"
      *
      * @var array
      */
-    protected $attributes = ['format' => 'html'];
+    protected $attributes = [
+        'format' => 'html',
+        'linenos' => true,
+    ];
 
     /**
      * The code to highlight
@@ -181,14 +182,6 @@ class CodeBlockParser extends \Twig_TokenParser
                 $this->attributes['start'] = $this->parseStartOption($token, $stream);
                 break;
 
-            case 'end':
-                $this->attributes['end'] = $this->parseEndOption($token, $stream);
-                break;
-
-            case 'range':
-                $this->attributes['range'] = $this->parseRangeOption($token, $stream);
-                break;
-
             case 'mark':
                 $this->attributes['mark'] = $this->parseMarkOption($token, $stream);
                 break;
@@ -197,15 +190,24 @@ class CodeBlockParser extends \Twig_TokenParser
                 $this->attributes['linenos'] = $this->parseLinenosOption($token, $stream);
                 break;
 
-            case 'phpopentag':
-                $this->attributes['phpopentag'] = $this->parsePhpOpenTagOption($token, $stream);
+            case 'class':
+                $this->attributes['class'] = $this->parseClassOption($token, $stream);
                 break;
 
-            default:
-                if ($token->test(\Twig_Token::STRING_TYPE)) {
-                    $this->parseStringAttribute($token, $stream);
-                }
-                $stream->next();
+            case 'title':
+                $this->attributes['title'] = $this->parseTitleOption($token, $stream);
+                break;
+
+            case 'link':
+                $this->attributes['linkUrl'] = $this->parseLinkOption($token, $stream);
+                break;
+
+            case 'link_text':
+                $this->attributes['linkText'] = $this->parseLinkTextOption($token, $stream);
+                break;
+
+            case 'phpopentag':
+                $this->attributes['phpopentag'] = $this->parsePhpOpenTagOption($token, $stream);
                 break;
         }
     }
@@ -274,40 +276,6 @@ class CodeBlockParser extends \Twig_TokenParser
     }
 
     /**
-     * Returns the end option value from the end token
-     *
-     * @param \Twig_Token $token The token to parse
-     * @param \Twig_TokenStream $stream The token stream being traversed
-     * @return integer
-     */
-    protected function parseEndOption(\Twig_Token $token, \Twig_TokenStream $stream)
-    {
-        $this->testToken('end', $token, $stream);
-
-        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::NUMBER_TYPE);
-    }
-
-    /**
-     * Returns the range option value from the range token
-     *
-     * @param \Twig_Token $token The token to parse
-     * @param \Twig_TokenStream $stream The token stream being traversed
-     * @return string
-     */
-    protected function parseRangeOption(\Twig_Token $token, \Twig_TokenStream $stream)
-    {
-        $this->testToken('range', $token, $stream);
-
-        $stream->next();
-        $stream->expect(\Twig_Token::PUNCTUATION_TYPE);
-        $rangeLeft = $stream->expect(\Twig_Token::NUMBER_TYPE);
-        $stream->expect(\Twig_Token::OPERATOR_TYPE);
-        $rangeRight = $stream->expect(\Twig_Token::NUMBER_TYPE);
-
-        return $rangeLeft->getValue() . '-' . $rangeRight->getValue();
-    }
-
-    /**
      * Returns the mark option value from the mark token
      *
      * @param \Twig_Token $token The token to parse
@@ -346,6 +314,62 @@ class CodeBlockParser extends \Twig_TokenParser
     }
 
     /**
+     * Returns the class option value from the class token
+     *
+     * @param \Twig_Token $token The token to parse
+     * @param \Twig_TokenStream $stream The token stream being traversed
+     * @return string
+     */
+    protected function parseClassOption(\Twig_Token $token, \Twig_TokenStream $stream)
+    {
+        $this->testToken('class', $token, $stream);
+
+        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::STRING_TYPE);
+    }
+
+    /**
+     * Returns the title option value from the title token
+     *
+     * @param \Twig_Token $token The token to parse
+     * @param \Twig_TokenStream $stream The token stream being traversed
+     * @return string
+     */
+    protected function parseTitleOption(\Twig_Token $token, \Twig_TokenStream $stream)
+    {
+        $this->testToken('title', $token, $stream);
+
+        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::STRING_TYPE);
+    }
+
+    /**
+     * Returns the link option value from the link token
+     *
+     * @param \Twig_Token $token The token to parse
+     * @param \Twig_TokenStream $stream The token stream being traversed
+     * @return string
+     */
+    protected function parseLinkOption(\Twig_Token $token, \Twig_TokenStream $stream)
+    {
+        $this->testToken('link', $token, $stream);
+
+        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::STRING_TYPE);
+    }
+
+    /**
+     * Returns the link_text option value from the link_text token
+     *
+     * @param \Twig_Token $token The token to parse
+     * @param \Twig_TokenStream $stream The token stream being traversed
+     * @return string
+     */
+    protected function parseLinkTextOption(\Twig_Token $token, \Twig_TokenStream $stream)
+    {
+        $this->testToken('link_text', $token, $stream);
+
+        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::STRING_TYPE);
+    }
+
+    /**
      * Returns the phpopentag option value from the phpopentag token
      *
      * @param \Twig_Token $token The token to parse
@@ -357,38 +381,6 @@ class CodeBlockParser extends \Twig_TokenParser
         $this->testToken('phpopentag', $token, $stream);
 
         return $this->getNextExpectedBoolValueFromStream($stream, 'phpopentag');
-    }
-
-    /**
-     * Parses a string attribute token, saving it as either the title, link URL, or link text
-     *
-     * @param \Twig_Token $token The token to parse
-     * @param \Twig_TokenStream $stream The token stream being traversed
-     * @return void
-     */
-    protected function parseStringAttribute(\Twig_Token $token, \Twig_TokenStream $stream)
-    {
-        if (!$token->test(\Twig_Token::STRING_TYPE)) {
-            throw new RuntimeException(
-                sprintf(
-                    "Expected string token but received '%s' instead",
-                    \Twig_Token::typeToEnglish($token->getType())
-                ),
-                $stream->getCurrent()->getLine(),
-                $stream->getFilename()
-            );
-        }
-
-        // If any of these values has already been set, then set the next
-        // property with this string. The string order that must be followed
-        // in the codeblock tag is: title, url, link text
-        if (empty($this->attributes['title'])) {
-            $this->attributes['title'] = $token->getValue();
-        } elseif (empty($this->attributes['linkUrl'])) {
-            $this->attributes['linkUrl'] = $token->getValue();
-        } elseif (empty($this->attributes['linkText'])) {
-            $this->attributes['linkText'] = $token->getValue();
-        }
     }
 
     /**

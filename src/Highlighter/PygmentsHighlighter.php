@@ -111,10 +111,6 @@ class PygmentsHighlighter implements HighlighterInterface
             $pygmentsOptions['linenostart'] = $options['start'];
         }
 
-        if (!empty($options['range'])) {
-            $pygmentsOptions['linenostart'] = (int) $options['range'];
-        }
-
         if (!empty($options['mark'])) {
             $pygmentsOptions['hl_lines'] = $this->parseMarks($options['mark']);
         }

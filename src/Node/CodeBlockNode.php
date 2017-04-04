@@ -80,12 +80,17 @@ class CodeBlockNode extends \Twig_Node
             ->raw(");\n");
 
         if ($this->hasAttribute('format') && $this->getAttribute('format') == 'html') {
+            $classnames = 'code-highlight-figure';
+            if ($this->hasAttribute('class')) {
+                $classnames .= ' ' . $this->getAttribute('class');
+            }
+
             $compiler
                 ->write('$figcaption = ')
                 ->string($this->getFigcaption())
                 ->raw(";\n")
                 ->write('echo sprintf(')
-                ->raw('"<figure class=\"code-highlight-figure\">%s%s</figure>\n",')
+                ->raw('"<figure class=\"' . $classnames . '\">%s%s</figure>\n",')
                 ->raw(' $figcaption, $highlightedCode')
                 ->raw(");\n");
         } else {
