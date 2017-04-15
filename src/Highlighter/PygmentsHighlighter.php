@@ -26,6 +26,11 @@ class PygmentsHighlighter implements HighlighterInterface
     const DEFAULT_FORMAT = 'html';
 
     /**
+     * Default lexer
+     */
+    const DEFAULT_LEXER = 'text';
+
+    /**
      * The path to pygmentize or just "pygmentize" if it's in the PATH
      *
      * @var string
@@ -64,11 +69,15 @@ class PygmentsHighlighter implements HighlighterInterface
      */
     protected function parseLexer(array $options)
     {
+        if (!empty($options['lang']) && strtolower($options['lang']) === 'plain') {
+            return static::DEFAULT_LEXER;
+        }
+
         if (!empty($options['lang'])) {
             return $options['lang'];
         }
 
-        return null;
+        return static::DEFAULT_LEXER;
     }
 
     /**
@@ -82,7 +91,7 @@ class PygmentsHighlighter implements HighlighterInterface
             return $options['format'];
         }
 
-        return self::DEFAULT_FORMAT;
+        return static::DEFAULT_FORMAT;
     }
 
     /**
