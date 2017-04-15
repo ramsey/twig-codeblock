@@ -226,7 +226,7 @@ class CodeBlockParser extends \Twig_TokenParser
             throw new RuntimeException(
                 sprintf("Expected '%s' token but received '%s' instead.", $value, $token->getValue()),
                 $stream->getCurrent()->getLine(),
-                $stream->getSourceContext()->getName()
+                $this->getStreamFilename($stream)
             );
         }
 
@@ -425,10 +425,25 @@ class CodeBlockParser extends \Twig_TokenParser
                     $optionName
                 ),
                 $stream->getCurrent()->getLine(),
-                $stream->getSourceContext()->getName()
+                $this->getStreamFilename($stream)
             );
         }
 
         return $expr->getAttribute('value');
+    }
+
+    /**
+     * Returns the filename for the given stream
+     *
+     * @param \Twig_TokenStream $stream
+     * @return string
+     */
+    private function getStreamFilename(\Twig_TokenStream $stream)
+    {
+        if (method_exists($stream, 'getFilename')) {
+            return $stream->getFilename();
+        }
+
+        return $stream->getSourceContext()->getName();
     }
 }
