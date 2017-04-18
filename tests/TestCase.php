@@ -2,16 +2,16 @@
 
 namespace Ramsey\Twig\CodeBlock\Test;
 
-use Ramsey\Twig\CodeBlock\CodeBlockExtension;
+use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
-class IntegrationTest extends \Twig_Test_IntegrationTestCase
+class TestCase extends PHPUnitTestCase
 {
     protected function setUp()
     {
         exec('which pygmentize', $output, $return);
 
         if ($return === 1) {
-            $this->fail('pygmentize not found; unable to run tests');
+            $this->fail('`pygmentize` not found; unable to run tests');
         }
 
         $pygmentsVersion = exec('pygmentize -V', $output, $return);
@@ -24,18 +24,5 @@ class IntegrationTest extends \Twig_Test_IntegrationTestCase
                 . $pygmentsVersion
             );
         }
-    }
-
-    public function getExtensions()
-    {
-        return [
-            // Defaults to using pygmentize
-            new CodeBlockExtension(),
-        ];
-    }
-
-    public function getFixturesDir()
-    {
-        return __DIR__ . '/fixtures/integration/';
     }
 }

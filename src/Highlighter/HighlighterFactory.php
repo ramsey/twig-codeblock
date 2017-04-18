@@ -33,7 +33,7 @@ class HighlighterFactory
         switch ($highlighter) {
             case 'pygments':
             case null:
-                $highlighterClass = 'Ramsey\Twig\CodeBlock\Highlighter\PygmentsHighlighter';
+                $highlighterClass = PygmentsHighlighter::class;
                 break;
             default:
                 // A different class name must have been specified
@@ -47,7 +47,7 @@ class HighlighterFactory
             throw new \RuntimeException($e->getMessage());
         }
 
-        if ($reflection->implementsInterface('Ramsey\Twig\CodeBlock\Highlighter\HighlighterInterface')) {
+        if ($reflection->implementsInterface(HighlighterInterface::class)) {
             return $reflection->newInstanceArgs($arguments);
         }
 
@@ -55,7 +55,7 @@ class HighlighterFactory
             sprintf(
                 "'%s' must be an instance of '%s'.",
                 $highlighterClass,
-                'Ramsey\Twig\CodeBlock\Highlighter\HighlighterInterface'
+                HighlighterInterface::class
             )
         );
     }

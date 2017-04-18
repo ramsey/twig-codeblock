@@ -420,7 +420,10 @@ class CodeBlockParser extends \Twig_TokenParser
     private function getStreamFilename(\Twig_TokenStream $stream)
     {
         if (method_exists($stream, 'getFilename')) {
+            // Support for 1.x versions of Twig.
+            // @codeCoverageIgnoreStart
             return $stream->getFilename();
+            // @codeCoverageIgnoreEnd
         }
 
         return $stream->getSourceContext()->getName();
