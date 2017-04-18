@@ -1,7 +1,7 @@
 --TEST--
 Test "linenos" set to "false" turns off the line numbers
 --TEMPLATE--
-{% codeblock lang:php linenos:false %}
+{% codeblock lang:"php" linenos:false %}
 <?php
 namespace Foo;
 

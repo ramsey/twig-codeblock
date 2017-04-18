@@ -1,7 +1,7 @@
 --TEST--
 Test "link_text" does not show up without "link"
 --TEMPLATE--
-{% codeblock title:"My Awesome Example" link_text:"Go to the code!" lang:php %}
+{% codeblock title:"My Awesome Example" link_text:"Go to the code!" lang:"php" %}
 <?php
 namespace Foo;
 

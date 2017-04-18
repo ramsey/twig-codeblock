@@ -1,7 +1,7 @@
 --TEST--
 Test codeblock tag with lang option set to "php"
 --TEMPLATE--
-{% codeblock lang:php %}
+{% codeblock lang:"php" %}
 <?php
 namespace Foo;
 

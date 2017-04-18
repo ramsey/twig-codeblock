@@ -1,7 +1,7 @@
 --TEST--
 Test "start" is ignored when "linenos" is "false"
 --TEMPLATE--
-{% codeblock lang:php linenos:false start:12 %}
+{% codeblock lang:"php" linenos:false start:12 %}
 <?php
 namespace Foo;
 

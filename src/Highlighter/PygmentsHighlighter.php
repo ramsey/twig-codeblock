@@ -21,11 +21,6 @@ use Ramsey\Pygments\Pygments;
 class PygmentsHighlighter implements HighlighterInterface
 {
     /**
-     * Default output format
-     */
-    const DEFAULT_FORMAT = 'html';
-
-    /**
      * Default lexer
      */
     const DEFAULT_LEXER = 'text';
@@ -54,8 +49,8 @@ class PygmentsHighlighter implements HighlighterInterface
     public function highlight($code, array $options = [])
     {
         $lexer = $this->parseLexer($options);
-        $format = $this->parseFormat($options);
-        $pygmentsOptions = $this->parsePygmentsOptions($options);
+        $format = $options['format'];
+        $pygmentsOptions = $this->parsePygmentsOptions($options, $code);
 
         return $this
             ->getPygments($this->pygmentizePath)
@@ -81,25 +76,13 @@ class PygmentsHighlighter implements HighlighterInterface
     }
 
     /**
-     * Returns the output format from the options
-     *
-     * @return string
-     */
-    protected function parseFormat(array $options)
-    {
-        if (!empty($options['format'])) {
-            return $options['format'];
-        }
-
-        return static::DEFAULT_FORMAT;
-    }
-
-    /**
      * Returns an array of options formatted for use with pygmentize
      *
+     * @param array $options Options passed to the highlighter
+     * @param string $code The code to highlight
      * @return array
      */
-    protected function parsePygmentsOptions(array $options)
+    protected function parsePygmentsOptions(array $options, $code)
     {
         $pygmentsOptions = ['encoding' => 'utf-8'];
 
@@ -115,7 +98,10 @@ class PygmentsHighlighter implements HighlighterInterface
             $pygmentsOptions['hl_lines'] = $this->parseMarks($options['mark']);
         }
 
-        if (isset($options['phpopentag']) && $options['phpopentag'] === false) {
+        if (!empty($options['lang'])
+            && strtolower($options['lang']) === 'php'
+            && stripos($code, '<?php') === false
+        ) {
             $pygmentsOptions['startinline'] = 'True';
         }
 

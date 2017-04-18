@@ -1,7 +1,7 @@
 --TEST--
 Test "link" shows up with "title"
 --TEMPLATE--
-{% codeblock title:"My Awesome Example" link:"https://example.com/foo.php?a=123&b=bar&c=foo;bar" lang:php %}
+{% codeblock title:"My Awesome Example" link:"https://example.com/foo.php?a=123&b=bar&c=foo;bar" lang:"php" %}
 <?php
 namespace Foo;
 

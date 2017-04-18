@@ -1,7 +1,7 @@
 --TEST--
 Test "link_text" is used as the text for the "link"
 --TEMPLATE--
-{% codeblock title:"My Awesome Example" link_text:"Go to the code!" link:"https://example.com/foo.php?a=123&b=bar&c=foo;bar" lang:php %}
+{% codeblock title:"My Awesome Example" link_text:"Go to the code!" link:"https://example.com/foo.php?a=123&b=bar&c=foo;bar" lang:"php" %}
 <?php
 namespace Foo;
 

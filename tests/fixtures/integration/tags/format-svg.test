@@ -1,7 +1,7 @@
 --TEST--
 Test codeblock tag with format option set to "svg"
 --TEMPLATE--
-{% codeblock lang:php format:svg %}
+{% codeblock lang:"php" format:"svg" %}
 <?php
 namespace Foo;
 

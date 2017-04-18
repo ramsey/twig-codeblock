@@ -1,7 +1,7 @@
 --TEST--
 Test "mark" highlights the indicated line numbers
 --TEMPLATE--
-{% codeblock lang:php start:12 mark:7,11-14,18 %}
+{% codeblock lang:"php" start:12 mark:7,11-14,18 %}
 <?php
 namespace Foo;
 

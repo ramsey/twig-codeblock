@@ -1,7 +1,7 @@
 --TEST--
 Exception for unrecognized "linenos" value
 --TEMPLATE--
-{% codeblock lang:php linenos:foobar %}
+{% codeblock lang:"php" linenos:foobar %}
 <?php
 namespace Foo;
 

@@ -1,7 +1,7 @@
 --TEST--
 Test "start" sets the starting line numbers for the codeblock
 --TEMPLATE--
-{% codeblock lang:php start:12 %}
+{% codeblock lang:"php" start:12 %}
 <?php
 namespace Foo;
 

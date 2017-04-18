@@ -36,9 +36,6 @@ class CodeBlockParser extends \Twig_TokenParser
      * * `title`: The figcaption title for the code block
      * * `link`: Download or reference link for the code
      * * `link_text`: Text for the `link`, defaults to "link"
-     * * `phpopentag`: (PHP specific) if lang is "php" and the code to highlight
-     *     should not require a starting `<?php` tag, then set this to `false`;
-     *     defaults to `true`
      *
      * @var array
      */
@@ -205,10 +202,6 @@ class CodeBlockParser extends \Twig_TokenParser
             case 'link_text':
                 $this->attributes['linkText'] = $this->parseLinkTextOption($token, $stream);
                 break;
-
-            case 'phpopentag':
-                $this->attributes['phpopentag'] = $this->parsePhpOpenTagOption($token, $stream);
-                break;
         }
     }
 
@@ -244,7 +237,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('lang', $token, $stream);
 
-        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::NAME_TYPE);
+        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::STRING_TYPE);
     }
 
     /**
@@ -258,7 +251,7 @@ class CodeBlockParser extends \Twig_TokenParser
     {
         $this->testToken('format', $token, $stream);
 
-        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::NAME_TYPE);
+        return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::STRING_TYPE);
     }
 
     /**
@@ -367,20 +360,6 @@ class CodeBlockParser extends \Twig_TokenParser
         $this->testToken('link_text', $token, $stream);
 
         return $this->getNextExpectedStringValueFromStream($stream, \Twig_Token::STRING_TYPE);
-    }
-
-    /**
-     * Returns the phpopentag option value from the phpopentag token
-     *
-     * @param \Twig_Token $token The token to parse
-     * @param \Twig_TokenStream $stream The token stream being traversed
-     * @return boolean
-     */
-    protected function parsePhpOpenTagOption(\Twig_Token $token, \Twig_TokenStream $stream)
-    {
-        $this->testToken('phpopentag', $token, $stream);
-
-        return $this->getNextExpectedBoolValueFromStream($stream, 'phpopentag');
     }
 
     /**

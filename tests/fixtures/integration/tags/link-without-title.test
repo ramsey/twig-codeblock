@@ -1,7 +1,7 @@
 --TEST--
 Test "link" does not show up without "title"
 --TEMPLATE--
-{% codeblock link:"https://example.com/foo.php?a=123&b=bar&c=foo;bar" lang:php %}
+{% codeblock link:"https://example.com/foo.php?a=123&b=bar&c=foo;bar" lang:"php" %}
 <?php
 namespace Foo;
 

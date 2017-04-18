@@ -1,0 +1,51 @@
+--TEST--
+Test syntax highlighting with mixed HTML and PHP
+--TEMPLATE--
+{% codeblock lang:"html+php" %}
+<html>
+    <head>
+        <title>Foo</title>
+    </head>
+    <body>
+        <ul>
+            <?php if ($this->getFoo()): ?>
+                <?php foreach ($this->getFoo() as $foo): ?>
+                    <li><?php echo $foo->something; ?></li>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </ul>
+    </body>
+</html>
+{% endcodeblock %}
+--DATA--
+return array()
+--EXPECT--
+<figure class="code-highlight-figure"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Foo<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+            <span class="cp">&lt;?php</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getFoo</span><span class="p">())</span><span class="o">:</span> <span class="cp">?&gt;</span>
+                <span class="cp">&lt;?php</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getFoo</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$foo</span><span class="p">)</span><span class="o">:</span> <span class="cp">?&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$foo</span><span class="o">-&gt;</span><span class="na">something</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+                <span class="cp">&lt;?php</span> <span class="k">endforeach</span><span class="p">;</span> <span class="cp">?&gt;</span>
+            <span class="cp">&lt;?php</span> <span class="k">endif</span><span class="p">;</span> <span class="cp">?&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></figure>

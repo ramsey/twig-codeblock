@@ -37,7 +37,7 @@ A number of options are available to Codeblock. Note that order does not matter.
 
 Option       | Example                      | Description
 ------------ | ---------------------------- | ------------
-`lang`       | `lang:php`                   | Tells the syntax highlighter the programming language being highlighted. Pass "plain" to disable highlighting.
+`lang`       | `lang:"php"`                 | Tells the syntax highlighter the programming language being highlighted. Pass "plain" to disable highlighting.
 `title`      | `title:"Figure 2."`          | Add a title to your code block.
 `link`       | `link:"https://example.com"` | Add a link to your code block title.
 `link_text`  | `link_text:"Download Code"`  | Text to use for the link. Defaults to `"link"`.
@@ -45,13 +45,12 @@ Option       | Example                      | Description
 `start`      | `start:42`                   | Start the line numbering in your code block at this value.
 `mark`       | `mark:4-6,12`                | Mark specific lines of code. This example marks lines 4, 5, 6, and 12.
 `class`      | `class:"myclass foo"`        | Add CSS class names to the code `<figure>` element.
-`format`     | `format:html`                | The output format for the syntax highlighter. Defaults to `html`.
-`phpopentag` | `phpopentag:false`           | Set to `false` if `lang` is "php" and you wish to highlight a code block without the PHP open tag (`<?php`). Defaults to `true`.
+`format`     | `format:"html"`              | The output format for the syntax highlighter. Defaults to "html."
 
 ### Example
 
 ```
-{% codeblock lang:php phpopentag:false %}
+{% codeblock lang:"php" %}
 class Bar implements BarInterface
 {
     private $baz;
@@ -118,6 +117,7 @@ If using Pygments, here are just a few of the languages (lexers) it supports:
 * css
 * diff
 * html
+* html+php
 * javascript
 * json
 * php

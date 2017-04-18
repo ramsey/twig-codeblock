@@ -1,7 +1,7 @@
 --TEST--
 Test codeblock tag with format option set to "html"
 --TEMPLATE--
-{% codeblock lang:php format:html %}
+{% codeblock lang:"php" format:"html" %}
 <?php
 namespace Foo;
 

@@ -1,7 +1,7 @@
 --TEST--
 Test codeblock tag with format option set to "bbcode"
 --TEMPLATE--
-{% codeblock lang:php format:bbcode %}
+{% codeblock lang:"php" format:"bbcode" %}
 <?php
 namespace Foo;
 

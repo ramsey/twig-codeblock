@@ -79,7 +79,7 @@ class CodeBlockNode extends \Twig_Node
             ->repr($this->attributes)
             ->raw(");\n");
 
-        if ($this->hasAttribute('format') && $this->getAttribute('format') == 'html') {
+        if ($this->hasAttribute('format') && strtolower($this->getAttribute('format')) === 'html') {
             $classnames = 'code-highlight-figure';
             if ($this->hasAttribute('class')) {
                 $classnames .= ' ' . $this->getAttribute('class');

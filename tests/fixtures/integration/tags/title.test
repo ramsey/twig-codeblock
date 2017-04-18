@@ -1,7 +1,7 @@
 --TEST--
 Test "title" appears in <figcaption>
 --TEMPLATE--
-{% codeblock title:"My Awesome Example" lang:php %}
+{% codeblock title:"My Awesome Example" lang:"php" %}
 <?php
 namespace Foo;
 
