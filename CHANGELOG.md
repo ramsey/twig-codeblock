@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 3.0.0 - 2025-03-08
+
+### Added
+
+- Introduced an `Attributes` class to act as a fully-typed data transfer object of `{% codeblock %}` attributes.
+
+- Introduced a `Highlighter\HighlighterReference` class as a fully-typed data transfer object to specify which highlighter to use when compiling the Twig templates.
+
+### Changed
+
+- PHP 8.2 is the new minimum version required.
+
+- Twig 3.11.2 is the new minimum version required.
+
+- All classes in this package are now `final`.
+
+- Types are now declared everywhere.
+
+- [ramsey/pygments](https://github.com/ramsey/pygments) is no longer a required dependency; it is a suggested dependency.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 2.0.0 - 2017-04-18
 
 * Upgrade dependencies to require PHP 5.6 as the minimum PHP version

@@ -38,6 +38,9 @@
         "ramsey/pygments": "^3.0",
         "roave/security-advisories": "dev-latest"
     },
+    "suggest": {
+        "ramsey/pygments": "Required when using PygmentsHighlighter"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
