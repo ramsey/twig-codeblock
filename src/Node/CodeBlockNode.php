@@ -1,136 +1,112 @@
 <?php
+
 /**
- * This file is part of the Ramsey\Twig\CodeBlock extension for Twig
+ * This file is part of the ramsey/twig-codeblock library
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @copyright Copyright (c) Ben Ramsey (http://benramsey.com)
+ * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
  * @license http://opensource.org/licenses/MIT MIT
  */
 
+declare(strict_types=1);
+
 namespace Ramsey\Twig\CodeBlock\Node;
+
+use Ramsey\Twig\CodeBlock\Attributes;
+use Ramsey\Twig\CodeBlock\Highlighter\HighlighterReference;
+use Twig\Attribute\YieldReady;
+use Twig\Compiler;
+use Twig\Node\Node;
+
+use function assert;
+use function is_string;
+use function strtolower;
 
 /**
  * Represents a codeblock node in Twig
  */
-class CodeBlockNode extends \Twig_Node
+#[YieldReady]
+final class CodeBlockNode extends Node
 {
-    /**
-     * Name or fully-qualified classname of the highlighter
-     *
-     * @var string
-     */
-    protected $highlighterName;
-
-    /**
-     * Array of constructor arguments to pass to the $highlighterName class
-     * upon instantiation
-     *
-     * @var array
-     */
-    protected $highlighterArgs;
-
     /**
      * Creates a codeblock node
      *
-     * @param string $highlighterName Name or fully-qualified classname of the
-     *     highlighter to use
-     * @param array $highlighterArgs Array of constructor arguments to pass to
-     *     the $highlighterName class upon instantiation
-     * @param array $attributes The attributes set on the codeblock tag
-     * @param \Twig_NodeInterface $body The body node contained within the codeblock tag
+     * @param HighlighterReference $highlighterReference Reference details for the highlighter to use
+     * @param Attributes $codeblockAttributes The attributes set on the codeblock tag
+     * @param Node $body The body node contained within the codeblock tag
      * @param int $lineno The line number of this node (for debugging)
-     * @param string $tag The name of the tag
      */
     public function __construct(
-        $highlighterName,
-        array $highlighterArgs,
-        array $attributes,
-        \Twig_Node $body,
-        $lineno,
-        $tag = 'codeblock'
+        private readonly HighlighterReference $highlighterReference,
+        private readonly Attributes $codeblockAttributes,
+        Node $body,
+        int $lineno,
     ) {
-        $this->highlighterName = (string) $highlighterName;
-        $this->highlighterArgs = $highlighterArgs;
-        parent::__construct(['body' => $body], $attributes, $lineno, $tag);
+        parent::__construct(['body' => $body], $this->codeblockAttributes->toArray(), $lineno);
     }
 
     /**
      * Compiles the node into PHP code for execution by Twig
      *
-     * @param \Twig_Compiler $compiler The compiler to which we add the node's PHP code
+     * @param Compiler $compiler The compiler to which we add the node's PHP code
      */
-    public function compile(\Twig_Compiler $compiler)
+    public function compile(Compiler $compiler): void
     {
         $compiler->addDebugInfo($this);
 
         $compiler
             ->write('$highlighter = \Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory::getHighlighter(')
-            ->string($this->getHighlighterName())
+            ->string($this->highlighterReference->highlighter)
             ->raw(', ')
-            ->repr($this->getHighlighterArgs())
+            ->repr($this->highlighterReference->arguments)
             ->raw(");\n");
+
+        $data = $this->getNode('body')->getAttribute('data');
+        assert(is_string($data));
 
         $compiler
             ->write('$highlightedCode = $highlighter->highlight(')
-            ->string($this->getNode('body')->getAttribute('data'))
+            ->string($data)
             ->raw(', ')
-            ->repr($this->attributes)
+            ->repr($this->codeblockAttributes->toArray())
             ->raw(");\n");
 
-        if ($this->hasAttribute('format') && strtolower($this->getAttribute('format')) === 'html') {
+        if (strtolower($this->codeblockAttributes->format) === 'html') {
             $classnames = 'code-highlight-figure';
-            if ($this->hasAttribute('class')) {
-                $classnames .= ' ' . $this->getAttribute('class');
+            if ($this->codeblockAttributes->class !== null) {
+                $classnames .= ' ' . $this->codeblockAttributes->class;
             }
+
+            $compiler
+                ->write('$classnames = ')
+                ->string($classnames)
+                ->raw(";\n");
 
             $compiler
                 ->write('$figcaption = ')
                 ->string($this->getFigcaption())
-                ->raw(";\n")
-                ->write('echo sprintf(')
-                ->raw('"<figure class=\"' . $classnames . '\">%s%s</figure>\n",')
-                ->raw(' $figcaption, $highlightedCode')
+                ->raw(";\n");
+
+            $compiler
+                ->write('yield sprintf(')
+                ->string('<figure class="%s">%s%s</figure>')
+                ->raw(', $classnames, $figcaption, $highlightedCode')
                 ->raw(");\n");
         } else {
-            $compiler->write('echo $highlightedCode;' . "\n");
+            $compiler->write('yield $highlightedCode;' . "\n");
         }
     }
 
-    /**
-     * Returns the name of the highlighter used by this code block
-     *
-     * @return string
-     */
-    public function getHighlighterName()
-    {
-        return $this->highlighterName;
-    }
-
-    /**
-     * Returns the highlighter arguments used by this code block
-     *
-     * @return array
-     */
-    public function getHighlighterArgs()
-    {
-        return $this->highlighterArgs;
-    }
-
-    /**
-     * Returns the figcaption HTML element for the codeblock
-     *
-     * @return string
-     */
-    protected function getFigcaption()
+    private function getFigcaption(): string
     {
         $figcaption = '';
 
-        if ($this->hasAttribute('title')) {
+        if ($this->codeblockAttributes->title !== null) {
             $figcaption = '<figcaption class="code-highlight-caption">';
             $figcaption .= '<span class="code-highlight-caption-title">';
-            $figcaption .= $this->getAttribute('title');
+            $figcaption .= $this->codeblockAttributes->title;
             $figcaption .= '</span>';
             $figcaption .= $this->getFigcaptionLink();
             $figcaption .= '</figcaption>';
@@ -139,19 +115,12 @@ class CodeBlockNode extends \Twig_Node
         return $figcaption;
     }
 
-    /**
-     * Returns the link for the figcaption, if applicable
-     *
-     * @return string
-     */
-    protected function getFigcaptionLink()
+    private function getFigcaptionLink(): string
     {
         $link = '';
 
-        if ($this->hasAttribute('linkUrl')) {
-            $link = '<a class="code-highlight-caption-link" href="'
-                . $this->getAttribute('linkUrl')
-                . '">';
+        if ($this->codeblockAttributes->linkUrl !== null) {
+            $link = '<a class="code-highlight-caption-link" href="' . $this->codeblockAttributes->linkUrl . '">';
             $link .= $this->getFigcaptionLinkText();
             $link .= '</a>';
         }
@@ -159,17 +128,8 @@ class CodeBlockNode extends \Twig_Node
         return $link;
     }
 
-    /**
-     * Returns the link text for the figcaption link
-     *
-     * @return string
-     */
-    protected function getFigcaptionLinkText()
+    private function getFigcaptionLinkText(): string
     {
-        if ($this->hasAttribute('linkText')) {
-            return $this->getAttribute('linkText');
-        }
-
-        return 'link';
+        return $this->codeblockAttributes->linkText ?? 'link';
     }
 }

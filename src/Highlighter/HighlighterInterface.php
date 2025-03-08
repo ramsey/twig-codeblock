@@ -1,17 +1,18 @@
 <?php
+
 /**
- * This file is part of the Ramsey\Twig\CodeBlock extension for Twig
+ * This file is part of the ramsey/twig-codeblock library
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @copyright Copyright (c) Ben Ramsey (http://benramsey.com)
+ * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
  * @license http://opensource.org/licenses/MIT MIT
  */
 
-namespace Ramsey\Twig\CodeBlock\Highlighter;
+declare(strict_types=1);
 
-use Ramsey\Twig\CodeBlock\TokenParser\CodeBlockParser;
+namespace Ramsey\Twig\CodeBlock\Highlighter;
 
 /**
  * Enforces a common interface for all highlighters used by the
@@ -23,10 +24,9 @@ interface HighlighterInterface
      * Returns the syntax-highlighted code
      *
      * @param string $code The source code to highlight
-     * @param array $options Parsed codeblock options that may be used when highlighting
-     *    the code; see {@see Ramsey\Twig\CodeBlock\TokenParser\CodeBlockParser::$attributes}
-     *    for option details
-     * @return string
+     * @param array<scalar | array<scalar | null> | null> $options Parsed
+     *     codeblock options that may be used when highlighting the code; see
+     *     {@see \Ramsey\Twig\CodeBlock\Attributes} for option details
      */
-    public function highlight($code, array $options = []);
+    public function highlight(string $code, array $options = []): string;
 }

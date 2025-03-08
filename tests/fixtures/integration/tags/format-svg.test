@@ -24,30 +24,30 @@ class Bar implements BarInterface
 }
 {% endcodeblock %}
 --DATA--
-return array()
+return []
 --EXPECT--
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
 <svg xmlns="http://www.w3.org/2000/svg">
 <g font-family="monospace" font-size="14px">
-<text x="0" y="14" xml:space="preserve"><tspan fill="#BC7A00">&lt;?php</tspan></text>
-<text x="0" y="33" xml:space="preserve"><tspan fill="#008000" font-weight="bold">namespace</tspan>&#160;Foo;</text>
-<text x="0" y="52" xml:space="preserve"></text>
-<text x="0" y="71" xml:space="preserve"><tspan fill="#BA2121" font-style="italic">/**</tspan></text>
-<text x="0" y="90" xml:space="preserve"><tspan fill="#BA2121" font-style="italic">&#160;*&#160;Awesome&#160;Contrived&#160;Example.</tspan></text>
-<text x="0" y="109" xml:space="preserve"><tspan fill="#BA2121" font-style="italic">&#160;*/</tspan></text>
-<text x="0" y="128" xml:space="preserve"><tspan fill="#008000" font-weight="bold">class</tspan>&#160;<tspan fill="#0000FF" font-weight="bold">Bar</tspan>&#160;<tspan fill="#008000" font-weight="bold">implements</tspan>&#160;BarInterface</text>
-<text x="0" y="147" xml:space="preserve">{</text>
-<text x="0" y="166" xml:space="preserve">&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">private</tspan>&#160;<tspan fill="#19177C">$baz</tspan>;</text>
-<text x="0" y="185" xml:space="preserve"></text>
-<text x="0" y="204" xml:space="preserve">&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">public</tspan>&#160;<tspan fill="#008000" font-weight="bold">function</tspan>&#160;<tspan fill="#0000FF">__construct</tspan>(BazInterface&#160;<tspan fill="#19177C">$baz</tspan>)</text>
-<text x="0" y="223" xml:space="preserve">&#160;&#160;&#160;&#160;{</text>
-<text x="0" y="242" xml:space="preserve">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan fill="#19177C">$this</tspan><tspan fill="#666666">-&gt;</tspan><tspan fill="#7D9029">baz</tspan>&#160;<tspan fill="#666666">=</tspan>&#160;<tspan fill="#19177C">$baz</tspan>;</text>
-<text x="0" y="261" xml:space="preserve">&#160;&#160;&#160;&#160;}</text>
-<text x="0" y="280" xml:space="preserve"></text>
-<text x="0" y="299" xml:space="preserve">&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">public</tspan>&#160;<tspan fill="#008000" font-weight="bold">function</tspan>&#160;<tspan fill="#0000FF">doIt</tspan>()</text>
-<text x="0" y="318" xml:space="preserve">&#160;&#160;&#160;&#160;{</text>
-<text x="0" y="337" xml:space="preserve">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">return</tspan>&#160;<tspan fill="#19177C">$this</tspan><tspan fill="#666666">-&gt;</tspan><tspan fill="#7D9029">baz</tspan><tspan fill="#666666">-&gt;</tspan><tspan fill="#7D9029">do</tspan>(<tspan fill="#BA2121">&#39;it&#39;</tspan>);</text>
-<text x="0" y="356" xml:space="preserve">&#160;&#160;&#160;&#160;}</text>
-<text x="0" y="375" xml:space="preserve">}</text>
-<text x="0" y="394" xml:space="preserve"></text></g></svg>
+<text x="57" y="14"  fill="#3D7B7B" font-style="italic" text-anchor="end">1</text><text x="76" y="14" xml:space="preserve"><tspan fill="#9C6500">&lt;?php</tspan></text>
+<text x="57" y="33" text-anchor="end"  fill="#3D7B7B" font-style="italic">2</text><text x="76" y="33" xml:space="preserve"><tspan fill="#008000" font-weight="bold">namespace</tspan>&#160;Foo;</text>
+<text x="57" y="52" text-anchor="end"  fill="#3D7B7B" font-style="italic">3</text><text x="76" y="52" xml:space="preserve"></text>
+<text x="57" y="71" text-anchor="end"  fill="#3D7B7B" font-style="italic">4</text><text x="76" y="71" xml:space="preserve"><tspan fill="#BA2121" font-style="italic">/**</tspan></text>
+<text x="57" y="90" text-anchor="end"  fill="#3D7B7B" font-style="italic">5</text><text x="76" y="90" xml:space="preserve"><tspan fill="#BA2121" font-style="italic">&#160;*&#160;Awesome&#160;Contrived&#160;Example.</tspan></text>
+<text x="57" y="109" text-anchor="end"  fill="#3D7B7B" font-style="italic">6</text><text x="76" y="109" xml:space="preserve"><tspan fill="#BA2121" font-style="italic">&#160;*/</tspan></text>
+<text x="57" y="128" text-anchor="end"  fill="#3D7B7B" font-style="italic">7</text><text x="76" y="128" xml:space="preserve"><tspan fill="#008000" font-weight="bold">class</tspan>&#160;<tspan fill="#0000FF" font-weight="bold">Bar</tspan>&#160;<tspan fill="#008000" font-weight="bold">implements</tspan>&#160;BarInterface</text>
+<text x="57" y="147" text-anchor="end"  fill="#3D7B7B" font-style="italic">8</text><text x="76" y="147" xml:space="preserve">{</text>
+<text x="57" y="166" text-anchor="end"  fill="#3D7B7B" font-style="italic">9</text><text x="76" y="166" xml:space="preserve">&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">private</tspan>&#160;<tspan fill="#19177C">$baz</tspan>;</text>
+<text x="57" y="185" text-anchor="end"  fill="#3D7B7B" font-style="italic">10</text><text x="76" y="185" xml:space="preserve"></text>
+<text x="57" y="204" text-anchor="end"  fill="#3D7B7B" font-style="italic">11</text><text x="76" y="204" xml:space="preserve">&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">public</tspan>&#160;<tspan fill="#008000" font-weight="bold">function</tspan>&#160;<tspan fill="#0000FF">__construct</tspan>(BazInterface&#160;<tspan fill="#19177C">$baz</tspan>)</text>
+<text x="57" y="223" text-anchor="end"  fill="#3D7B7B" font-style="italic">12</text><text x="76" y="223" xml:space="preserve">&#160;&#160;&#160;&#160;{</text>
+<text x="57" y="242" text-anchor="end"  fill="#3D7B7B" font-style="italic">13</text><text x="76" y="242" xml:space="preserve">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan fill="#19177C">$this</tspan><tspan fill="#666666">-&gt;</tspan><tspan fill="#687822">baz</tspan>&#160;<tspan fill="#666666">=</tspan>&#160;<tspan fill="#19177C">$baz</tspan>;</text>
+<text x="57" y="261" text-anchor="end"  fill="#3D7B7B" font-style="italic">14</text><text x="76" y="261" xml:space="preserve">&#160;&#160;&#160;&#160;}</text>
+<text x="57" y="280" text-anchor="end"  fill="#3D7B7B" font-style="italic">15</text><text x="76" y="280" xml:space="preserve"></text>
+<text x="57" y="299" text-anchor="end"  fill="#3D7B7B" font-style="italic">16</text><text x="76" y="299" xml:space="preserve">&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">public</tspan>&#160;<tspan fill="#008000" font-weight="bold">function</tspan>&#160;<tspan fill="#0000FF">doIt</tspan>()</text>
+<text x="57" y="318" text-anchor="end"  fill="#3D7B7B" font-style="italic">17</text><text x="76" y="318" xml:space="preserve">&#160;&#160;&#160;&#160;{</text>
+<text x="57" y="337" text-anchor="end"  fill="#3D7B7B" font-style="italic">18</text><text x="76" y="337" xml:space="preserve">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan fill="#008000" font-weight="bold">return</tspan>&#160;<tspan fill="#19177C">$this</tspan><tspan fill="#666666">-&gt;</tspan><tspan fill="#687822">baz</tspan><tspan fill="#666666">-&gt;</tspan><tspan fill="#687822">do</tspan>(<tspan fill="#BA2121">&#39;it&#39;</tspan>);</text>
+<text x="57" y="356" text-anchor="end"  fill="#3D7B7B" font-style="italic">19</text><text x="76" y="356" xml:space="preserve">&#160;&#160;&#160;&#160;}</text>
+<text x="57" y="375" text-anchor="end"  fill="#3D7B7B" font-style="italic">20</text><text x="76" y="375" xml:space="preserve">}</text>
+<text x="57" y="394" text-anchor="end"  fill="#3D7B7B" font-style="italic">21</text><text x="76" y="394" xml:space="preserve"></text></g></svg>

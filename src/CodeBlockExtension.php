@@ -1,72 +1,82 @@
 <?php
+
 /**
- * This file is part of the Ramsey\Twig\CodeBlock extension for Twig
+ * This file is part of the ramsey/twig-codeblock library
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @copyright Copyright (c) Ben Ramsey (http://benramsey.com)
+ * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
  * @license http://opensource.org/licenses/MIT MIT
  */
 
+declare(strict_types=1);
+
 namespace Ramsey\Twig\CodeBlock;
 
-use Ramsey\Twig\CodeBlock\Highlighter\HighlighterFactory;
+use Ramsey\Twig\CodeBlock\Highlighter\HighlighterReference;
+use Twig\Extension\ExtensionInterface;
 
 /**
  * A Twig extension providing codeblock tag functionality for marking up
- * blocks of source code in content (i.e. syntax highlighting)
+ * blocks of source code in content (i.e., syntax highlighting)
  */
-class CodeBlockExtension extends \Twig_Extension
+final readonly class CodeBlockExtension implements ExtensionInterface
 {
     /**
-     * Name or fully-qualified classname of the highlighter to use
-     *
-     * @var string
+     * @param HighlighterReference $highlighterReference Reference details for the highlighter to use
      */
-    protected $highlighterName;
-
-    /**
-     * Array of constructor arguments to pass to the $highlighterName class
-     * upon instantiation
-     *
-     * @var array
-     */
-    protected $highlighterArgs;
-
-    /**
-     * Creates a codeblock Twig extension
-     *
-     * @param string $highlighterName Name or fully-qualified classname of the
-     *     highlighter to use
-     * @param array $highlighterArgs Array of constructor arguments to pass to
-     *     the $highlighterName class upon instantiation
-     */
-    public function __construct($highlighterName = 'pygments', array $highlighterArgs = [])
+    public function __construct(private HighlighterReference $highlighterReference)
     {
-        $this->highlighterName = (string) $highlighterName;
-        $this->highlighterArgs = $highlighterArgs;
     }
 
     /**
-     * Returns the name of this extension
-     *
-     * @return string
+     * @inheritDoc
      */
-    public function getName()
+    public function getFilters(): array
     {
-        return 'codeblock';
+        return [];
     }
 
     /**
-     * Returns an array of token parsers provided by this extension
-     *
-     * @return array
+     * @inheritDoc
      */
-    public function getTokenParsers()
+    public function getFunctions(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getNodeVisitors(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getOperators(): array
+    {
+        return [[], []];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTests(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTokenParsers(): array
     {
         return [
-            new TokenParser\CodeBlockParser($this->highlighterName, $this->highlighterArgs),
+            new TokenParser\CodeBlockParser($this->highlighterReference),
         ];
     }
 }

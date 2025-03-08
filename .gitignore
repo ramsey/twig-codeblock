@@ -1,6 +1,6 @@
-*.phar
-.DS_Store
-/build/
+/captainhook.config.json
 /composer.lock
+/phpcs.xml
+/phpstan.neon
 /phpunit.xml
 /vendor/

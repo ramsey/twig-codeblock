@@ -1,104 +1,108 @@
 <?php
+
 /**
- * This file is part of the Ramsey\Twig\CodeBlock extension for Twig
+ * This file is part of the ramsey/twig-codeblock library
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @copyright Copyright (c) Ben Ramsey (http://benramsey.com)
+ * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
  * @license http://opensource.org/licenses/MIT MIT
  */
+
+declare(strict_types=1);
 
 namespace Ramsey\Twig\CodeBlock\Highlighter;
 
 use Ramsey\Pygments\Pygments;
+
+use function array_merge;
+use function explode;
+use function implode;
+use function is_int;
+use function is_string;
+use function range;
+use function str_contains;
+use function stripos;
+use function strtolower;
 
 /**
  * A syntax-highlighter that uses [Python Pygments](http://pygments.org/) and
  * the [ramsey/pygments](https://github.com/ramsey/pygments) library for
  * highlighting
  */
-class PygmentsHighlighter implements HighlighterInterface
+final readonly class PygmentsHighlighter implements HighlighterInterface
 {
-    /**
-     * Default lexer
-     */
-    const DEFAULT_LEXER = 'text';
+    private const DEFAULT_LEXER = 'text';
 
     /**
-     * The path to pygmentize or just "pygmentize" if it's in the PATH
-     *
-     * @var string
-     */
-    protected $pygmentizePath;
-
-    /**
-     * Creates a highlighter that uses pygmentize
-     *
-     * @param string $pygmentizePath The path to pygmentize or just "pygmentize"
+     * @param string $pygmentizePath The path to pygmentize or just "pygmentize,"
      *     if it's in the PATH
      */
-    public function __construct($pygmentizePath = 'pygmentize')
+    public function __construct(private string $pygmentizePath = 'pygmentize')
     {
-        $this->pygmentizePath = $pygmentizePath;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
-    public function highlight($code, array $options = [])
+    public function highlight(string $code, array $options = []): string
     {
-        $lexer = $this->parseLexer($options);
-        $format = $options['format'];
-        $pygmentsOptions = $this->parsePygmentsOptions($options, $code);
+        /** @var string $formatter */
+        $formatter = $options['format'] ?? 'html';
 
-        return $this
-            ->getPygments($this->pygmentizePath)
-            ->highlight($code, $lexer, $format, $pygmentsOptions);
+        $lexer = $this->parseLexer($options);
+        $pygmentsOptions = $this->parsePygmentsOptions($options, $formatter, $code);
+
+        return $this->getPygments()->highlight($code, $lexer, $formatter, $pygmentsOptions);
     }
 
     /**
      * Returns the programming language from the options
      *
-     * @return string
+     * @param array<scalar | array<scalar | null> | null> $options
      */
-    protected function parseLexer(array $options)
+    private function parseLexer(array $options): string
     {
-        if (!empty($options['lang']) && strtolower($options['lang']) === 'plain') {
-            return static::DEFAULT_LEXER;
+        if (isset($options['lang']) && is_string($options['lang'])) {
+            return strtolower($options['lang']) === 'plain' ? self::DEFAULT_LEXER : $options['lang'];
         }
 
-        if (!empty($options['lang'])) {
-            return $options['lang'];
-        }
-
-        return static::DEFAULT_LEXER;
+        return self::DEFAULT_LEXER;
     }
 
     /**
      * Returns an array of options formatted for use with pygmentize
      *
-     * @param array $options Options passed to the highlighter
-     * @param string $code The code to highlight
-     * @return array
+     * @param array<scalar | array<scalar | null> | null> $options
+     *
+     * @return array{
+     *     encoding: 'utf-8',
+     *     linenos?: 'True' | 'table',
+     *     linenostart?: int,
+     *     hl_lines?: string,
+     *     startinline?: 'True',
+     * }
      */
-    protected function parsePygmentsOptions(array $options, $code)
+    private function parsePygmentsOptions(array $options, string $formatter, string $code): array
     {
         $pygmentsOptions = ['encoding' => 'utf-8'];
 
-        if (!empty($options['linenos']) && $options['linenos'] === true) {
-            $pygmentsOptions['linenos'] = 'table';
+        if (isset($options['linenos']) && $options['linenos'] === true) {
+            $pygmentsOptions['linenos'] = $formatter === 'html' ? 'table' : 'True';
         }
 
-        if (!empty($options['start'])) {
+        if (isset($options['start']) && is_int($options['start'])) {
             $pygmentsOptions['linenostart'] = $options['start'];
         }
 
-        if (!empty($options['mark'])) {
+        if (isset($options['mark']) && is_string($options['mark'])) {
             $pygmentsOptions['hl_lines'] = $this->parseMarks($options['mark']);
         }
 
-        if (!empty($options['lang'])
+        if (
+            isset($options['lang'])
+            && is_string($options['lang'])
             && strtolower($options['lang']) === 'php'
             && stripos($code, '<?php') === false
         ) {
@@ -112,15 +116,14 @@ class PygmentsHighlighter implements HighlighterInterface
      * Parses the marked lines in a way that pygmentize can use
      *
      * @param string $marks The marks received from the codeblock
-     * @return string
      */
-    protected function parseMarks($marks)
+    private function parseMarks(string $marks): string
     {
         $markedLines = [];
 
         foreach (explode(',', $marks) as $nums) {
-            if (strpos($nums, '-') !== false) {
-                list($from, $to) = explode('-', $nums);
+            if (str_contains($nums, '-')) {
+                [$from, $to] = explode('-', $nums);
                 $markedLines = array_merge($markedLines, range($from, $to));
             } else {
                 $markedLines[] = $nums;
@@ -130,15 +133,8 @@ class PygmentsHighlighter implements HighlighterInterface
         return implode(' ', $markedLines);
     }
 
-    /**
-     * Returns a Pygments instance object
-     *
-     * @param string $pygmentizePath The path to pygmentize or just "pygmentize" if it's in the PATH
-     * @return Pygments
-     * @codeCoverageIgnore
-     */
-    protected function getPygments($pygmentizePath)
+    private function getPygments(): Pygments
     {
-        return new Pygments($pygmentizePath);
+        return new Pygments($this->pygmentizePath);
     }
 }

@@ -1,40 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ramsey\Twig\CodeBlock\Test;
 
 use Ramsey\Twig\CodeBlock\CodeBlockExtension;
+use Ramsey\Twig\CodeBlock\Highlighter\HighlighterReference;
+use Ramsey\Twig\CodeBlock\Highlighter\PygmentsHighlighter;
+use Twig\Test\IntegrationTestCase;
 
-class IntegrationTest extends \Twig_Test_IntegrationTestCase
+use function getenv;
+
+final class IntegrationTest extends IntegrationTestCase
 {
-    protected function setUp()
-    {
-        exec('which pygmentize', $output, $return);
-
-        if ($return === 1) {
-            $this->fail('pygmentize not found; unable to run tests');
-        }
-
-        $pygmentsVersion = exec('pygmentize -V', $output, $return);
-
-        if (preg_match('/2\.2\.?\d?/', $pygmentsVersion) === 0) {
-            $this->fail(
-                'Pygments version 2.2 is required to run the tests. However, '
-                . 'this library will work with any version of Python and '
-                . 'Pygments supported by the ramsey/pygments library. Found: '
-                . $pygmentsVersion
-            );
-        }
-    }
-
-    public function getExtensions()
+    /**
+     * @inheritDoc
+     */
+    public function getExtensions(): array
     {
         return [
-            // Defaults to using pygmentize
-            new CodeBlockExtension(),
+            new CodeBlockExtension(
+                new HighlighterReference(
+                    PygmentsHighlighter::class,
+                    ['pygmentizePath' => getenv('PYGMENTIZE_PATH')],
+                ),
+            ),
         ];
     }
 
-    public function getFixturesDir()
+    protected static function getFixturesDirectory(): string
     {
         return __DIR__ . '/fixtures/integration/';
     }

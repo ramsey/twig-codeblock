@@ -24,7 +24,7 @@ class Bar implements BarInterface
 }
 {% endcodeblock %}
 --DATA--
-return array()
+return []
 --EXPECT--
 <figure class="code-highlight-figure"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 <span class="k">namespace</span> <span class="nx">Foo</span><span class="p">;</span>

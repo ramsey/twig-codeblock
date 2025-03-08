@@ -24,6 +24,6 @@ class Bar implements BarInterface
 }
 {% endcodeblock %}
 --DATA--
-return array()
+return []
 --EXCEPTION--
 Ramsey\Twig\CodeBlock\Exception\SyntaxException: The linenos option must be boolean true or false (i.e. linenos:false) in "index.twig" at line 2.

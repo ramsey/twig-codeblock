@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="./vendor/autoload.php" colors="true" verbose="true">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="./tests/bootstrap.php"
+         colors="true"
+         cacheResultFile="./build/cache/phpunit.result.cache">
+
     <testsuites>
-        <testsuite>
+        <testsuite name="unit-tests">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
+
+    <coverage cacheDirectory="./build/cache/phpunit">
+        <include>
+            <directory>./src</directory>
+        </include>
+    </coverage>
+
+    <php>
+        <env name="PYGMENTIZE_PATH" value="pygmentize"/>
+    </php>
+
 </phpunit>
