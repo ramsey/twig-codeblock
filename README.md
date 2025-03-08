@@ -19,10 +19,10 @@ Add code snippets with syntax highlighting and more to any [Twig][] template
 with ramsey/twig-codeblock, a port of the `{% codeblock %}`
 [Liquid tag for Octopress/Jekyll][octopress-codeblock].
 
-By default, ramsey/twig-codeblock uses [Pygments][], the Python syntax highlighter,
-to generate HTML markup suitable for highlighting blocks of code, but it may use
-any syntax highlighter. To use another syntax highlighter, simply implement
-`HighlighterInterface` (see below for an example).
+ramsey/twig-codeblock includes an adapter for using [Pygments][], the Python
+syntax highlighter, with [ramsey/pygments][], but it may use any syntax
+highlighter. To use another syntax highlighter, implement `HighlighterInterface`
+(see below for an example).
 
 This project adheres to a [code of conduct](CODE_OF_CONDUCT.md).
 By participating in this project and its community, you are expected to
@@ -39,16 +39,16 @@ composer require ramsey/twig-codeblock
 ## Usage
 
 ```
-{% codeblock [options] %}
+{% codeblock [attributes] %}
 [lines of code]
 {% endcodeblock %}
 ```
 
-### Options
+### Attributes
 
-A number of options are available to Codeblock. Note that order does not matter.
+A number of attributes are available to `{% codeblock %}`:
 
-| Option      | Example                      | Description                                                                                                    |
+| Attribute   | Example                      | Description                                                                                                    |
 |-------------|------------------------------|----------------------------------------------------------------------------------------------------------------|
 | `lang`      | `lang:"php"`                 | Tells the syntax highlighter the programming language being highlighted. Pass "plain" to disable highlighting. |
 | `title`     | `title:"Figure 2."`          | Add a title to your code block.                                                                                |
@@ -59,6 +59,13 @@ A number of options are available to Codeblock. Note that order does not matter.
 | `mark`      | `mark:4-6,12`                | Mark specific lines of code. This example marks lines 4, 5, 6, and 12.                                         |
 | `class`     | `class:"myclass foo"`        | Add CSS class names to the code `<figure>` element.                                                            |
 | `format`    | `format:"html"`              | The output format for the syntax highlighter. Defaults to "html."                                              |
+
+> [!TIP]
+> Order of attributes does not matter.
+
+> [!WARNING]
+> Not all highlighters will support all attributes. However, the Pygments
+> highlighter does support each of these attributes.
 
 ### Example
 
