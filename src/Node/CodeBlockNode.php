@@ -44,7 +44,7 @@ final class CodeBlockNode extends Node
         Node $body,
         int $lineno,
     ) {
-        parent::__construct(['body' => $body], $this->codeblockAttributes->toArray(), $lineno);
+        parent::__construct(['body' => $body], [], $lineno);
     }
 
     /**
@@ -121,15 +121,10 @@ final class CodeBlockNode extends Node
 
         if ($this->codeblockAttributes->linkUrl !== null) {
             $link = '<a class="code-highlight-caption-link" href="' . $this->codeblockAttributes->linkUrl . '">';
-            $link .= $this->getFigcaptionLinkText();
+            $link .= $this->codeblockAttributes->linkText;
             $link .= '</a>';
         }
 
         return $link;
-    }
-
-    private function getFigcaptionLinkText(): string
-    {
-        return $this->codeblockAttributes->linkText ?? 'link';
     }
 }
