@@ -14,6 +14,10 @@ declare(strict_types=1);
 
 namespace Ramsey\Twig\CodeBlock\Highlighter;
 
+/**
+ * A reference to the highlighter class and its arguments, for use when compiling
+ * Twig templates
+ */
 final readonly class HighlighterReference
 {
     /**

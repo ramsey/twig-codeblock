@@ -19,6 +19,6 @@ use Twig\Error\SyntaxError;
 /**
  * Exception thrown when an error occurs when parsing the syntax of the Twig extension
  */
-class SyntaxException extends SyntaxError
+final class SyntaxException extends SyntaxError
 {
 }

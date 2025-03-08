@@ -19,6 +19,6 @@ use Twig\Error\RuntimeError;
 /**
  * Exception thrown when an error occurs at runtime in the Twig extension
  */
-class RuntimeException extends RuntimeError
+final class RuntimeException extends RuntimeError
 {
 }

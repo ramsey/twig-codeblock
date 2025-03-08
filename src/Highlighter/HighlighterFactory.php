@@ -22,7 +22,7 @@ use function sprintf;
 /**
  * Factory to get a highlighter by name or by fully-qualified classname
  */
-class HighlighterFactory
+final class HighlighterFactory
 {
     /**
      * Returns an instance of a highlighter
