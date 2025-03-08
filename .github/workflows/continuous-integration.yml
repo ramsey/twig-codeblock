@@ -71,6 +71,14 @@ jobs:
       - name: "Checkout repository"
         uses: "actions/checkout@v4"
 
+      - name: "Install Python"
+        uses: "actions/setup-python@v5"
+        with:
+          python-version: "3.13"
+
+      - name: "Install Python Pygments"
+        run: "pip install Pygments==2.19.1"
+
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
@@ -102,6 +110,14 @@ jobs:
     steps:
       - name: "Checkout repository"
         uses: "actions/checkout@v4"
+
+      - name: "Install Python"
+        uses: "actions/setup-python@v5"
+        with:
+          python-version: "3.13"
+
+      - name: "Install Python Pygments"
+        run: "pip install Pygments==2.19.1"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
